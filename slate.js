@@ -35,27 +35,7 @@ var topLeft = S.op("corner", {
         "height" : "screenSizeY/2"
 });
 
-var whichEdge = function(window, visible) {
-        var snapTolerance = 5;
-        var result = '';
-        var rect = window.rect();
-        // snapTop takes priority over snapBottom
-        if (rect.y <= visible.y + snapTolerance) {
-                result = 'top';
-        } else if (rect.y + rect.height + snapTolerance >= visible.y + visible.height) {
-                result = 'bottom';
-        }
-        // snapLeft takes priority over snapRight
-        if (rect.x <= visible.x + snapTolerance) {
-                result += 'left';
-        } else if (rect.x + rect.width + snapTolerance >= visible.x + visible.width) {
-                result += 'right';
-        }
-        // S.log("[SLATE] whichEdge: " + result + "; rect: " + JSON.stringify(rect) + "; visible: " + JSON.stringify(visible));
-        return result;          // top|topleft|topright|bottom|bottomleft|bottomright|left|right
-};
-
-var restricted = function(rect, visible) {
+var restrict = function(rect, visible) {
         // S.log("[SLATE] before restrict; rect: " + JSON.stringify(rect) + "; visible: " + JSON.stringify(visible));
         if (rect.width > visible.width) {
                 rect.width = visible.width;
@@ -81,63 +61,70 @@ var restricted = function(rect, visible) {
                 rect.y = (visible.y + visible.height) - rect.height;
                 // S.log("[SLATE] nudge up; new y: " + rect.y);
         }
-        return rect;
+        return {"x":rect.x, "y":rect.y, "width":rect.width, "height": rect.height};
 };
 
-var snapped = function(fn) {
-        return function(window) {
-                var visible = S.screen().visibleRect();
-                var edge = whichEdge(window, visible);
+var whichEdge = function(window, visible) {
+        var snapTolerance = 5;
+        var result = '';
+        var rect = window.rect();
+        // snapTop takes priority over snapBottom
+        if (rect.y <= visible.y + snapTolerance) {
+                result = 'top';
+        } else if (rect.y + rect.height + snapTolerance >= visible.y + visible.height) {
+                result = 'bottom';
+        }
+        // snapLeft takes priority over snapRight
+        if (rect.x <= visible.x + snapTolerance) {
+                result += 'left';
+        } else if (rect.x + rect.width + snapTolerance >= visible.x + visible.width) {
+                result += 'right';
+        }
+        // S.log("[SLATE] whichEdge: " + result + "; rect: " + JSON.stringify(rect) + "; visible: " + JSON.stringify(visible));
+        return result; // top|topleft|topright|bottom|bottomleft|bottomright|left|right
+};
 
-                fn();
-
-                if (edge !== '') {
-                        var rect = window.rect();
-                        // S.log("[SLATE] before snap; rect: " + JSON.stringify(rect) + "; visible: " + JSON.stringify(visible));
-                        if (edge.indexOf("top") != -1) {
-                                rect.y = visible.y;
-                        }
-                        if (edge.indexOf("left") != -1) {
-                                rect.x = visible.x;
-                        }
-                        if (edge.indexOf("bottom") != -1) {
-                                rect.y = (visible.y + visible.height) - rect.height;
-                        }
-                        if (edge.indexOf("right") != -1) {
-                                rect.x = (visible.x + visible.width) - rect.width;
-                        }
-                        // S.log('[SLATE] snap: ' + JSON.stringify(rect));
-                        window.doop("move", rect);
+var snap = function(window, visible, edge) {
+        if (edge !== '') {
+                var rect = window.rect();
+                if (edge.indexOf("top") != -1) {
+                        rect.y = visible.y;
                 }
-        };
+                if (edge.indexOf("left") != -1) {
+                        rect.x = visible.x;
+                }
+                if (edge.indexOf("bottom") != -1) {
+                        rect.y = (visible.y + visible.height) - rect.height;
+                }
+                if (edge.indexOf("right") != -1) {
+                        rect.x = (visible.x + visible.width) - rect.width;
+                }
+                window.doop("move", rect);
+        }
 };
 
 var flubber = function(op) {
         return function(window) {
-                // S.log("[SLATE] flubber operation: " + op);
-                return snapped(function() {
-                        var visible = S.screen().visibleRect();
-                        var rect = window.rect();
-                        // S.log("[SLATE] operation: " + op + "; rect: " + JSON.stringify(rect) + "; visible: " + JSON.stringify(visible));
-                        switch (op) {
-                        case "grow":
-                                rect.width = Math.round(rect.width * 1.1);
-                                rect.height = Math.round(rect.height * 1.1);
-                                break;
-                        case "shrink":
-                                rect.width = Math.round(rect.width * 0.9);
-                                rect.height = Math.round(rect.height * 0.9);
-                                break;
-                        default:
-                                // S.log("[SLATE] cannot perform unknown operation: " + op);
-                                return;
-                                break;
-                        }
-                        // S.log('[SLATE] op: ' + JSON.stringify(rect));
-                        rect = restricted(rect, visible);
-                        // S.log('[SLATE] restricted: ' + JSON.stringify(rect));
-                        window.doop("move", rect);
-                })(window);
+                var visible = S.screen().visibleRect();
+                var edge = whichEdge(window, visible);
+                var rect = window.rect();
+                switch (op) {
+                case "grow":
+                        rect.width = Math.round(rect.width * 1.1);
+                        rect.height = Math.round(rect.height * 1.1);
+                        break;
+                case "shrink":
+                        rect.width = Math.round(rect.width * 0.9);
+                        rect.height = Math.round(rect.height * 0.9);
+                        break;
+                default:
+                        S.log("[SLATE] cannot perform unknown operation: " + op);
+                        return;
+                }
+                // NOTE: some windows have discrete sizes; for best
+                // adherence to edges, need to resize, then snap.
+                window.doop("move", restrict(rect, visible);
+                snap(window, visible, edge);
         };
 };
 
