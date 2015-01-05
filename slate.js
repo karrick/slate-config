@@ -1,3 +1,4 @@
+// load KS library
 S.src(".kslate.js", true);
 
 KS.register(KS.op("move", "bottom-left"), ["m:ctrl,cmd", "pad1:ctrl,cmd"]);
@@ -13,15 +14,15 @@ KS.register(KS.op("move", "top-right"), ["o:ctrl,cmd", "pad9:ctrl,cmd"]);
 KS.register(KS.op("resize", "grow"), ["g:ctrl,cmd"]);
 KS.register(KS.op("resize", "shrink"), ["s:ctrl,cmd"]);
 
-KS.register(KS.op("resize", "grow-horizontal"), ["[:ctrl,cmd"]);
-KS.register(KS.op("resize", "shrink-horizontal"), ["[:shift,ctrl,cmd"]);
-KS.register(KS.op("resize", "full-width"), ["]:ctrl,cmd"]);
-KS.register(KS.op("resize", "half-width"), ["]:shift,ctrl,cmd"]);
+KS.register(KS.op("resize", "grow-horizontal"), ["right:ctrl,cmd"]);
+KS.register(KS.op("resize", "shrink-horizontal"), ["left:ctrl,cmd"]);
+KS.register(KS.op("resize", "full-width"), ["right:shift,ctrl,cmd"]);
+KS.register(KS.op("resize", "half-width"), ["left:shift,ctrl,cmd"]);
 
-KS.register(KS.op("resize", "grow-vertical"), [";:ctrl,cmd"]);
-KS.register(KS.op("resize", "shrink-vertical"), [";:shift,ctrl,cmd"]);
-KS.register(KS.op("resize", "full-height"), ["':ctrl,cmd"]);
-KS.register(KS.op("resize", "half-height"), ["':shift,ctrl,cmd"]);
+KS.register(KS.op("resize", "grow-vertical"), ["down:ctrl,cmd"]);
+KS.register(KS.op("resize", "shrink-vertical"), ["up:ctrl,cmd"]);
+KS.register(KS.op("resize", "full-height"), ["down:shift,ctrl,cmd"]);
+KS.register(KS.op("resize", "half-height"), ["up:shift,ctrl,cmd"]);
 
 // Bind All. NOTE: some of these may *not* work if you have not
 // removed the expose/spaces/mission control bindings.
