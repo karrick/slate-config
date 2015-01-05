@@ -186,60 +186,32 @@ var KS = (function(S) {
         return that;
 })(S);
 
-KS.register(KS.op("move", "bottom-left"), ["m:shift,ctrl,cmd", "pad1:shift,ctrl,cmd"]);
-KS.register(KS.op("move", "bottom-center"), [",:shift,ctrl,cmd", "pad2:shift,ctrl,cmd"]);
-KS.register(KS.op("move", "bottom-right"), [".:shift,ctrl,cmd", "pad3:shift,ctrl,cmd"]);
-KS.register(KS.op("move", "left"), ["j:shift,ctrl,cmd", "pad4:shift,ctrl,cmd"]);
-KS.register(KS.op("move", "center"), ["k:shift,ctrl,cmd", "pad5:shift,ctrl,cmd"]);
-KS.register(KS.op("move", "right"), ["l:shift,ctrl,cmd", "pad6:shift,ctrl,cmd"]);
-KS.register(KS.op('move', 'top-left'), ["u:shift,ctrl,cmd", "pad7:shift,ctrl,cmd"]);
-KS.register(KS.op("move", "top-center"), ["i:shift,ctrl,cmd", "pad8:shift,ctrl,cmd"]);
-KS.register(KS.op("move", "top-right"), ["o:shift,ctrl,cmd", "pad9:shift,ctrl,cmd"]);
+KS.register(KS.op("move", "bottom-left"), ["m:ctrl,cmd", "pad1:ctrl,cmd"]);
+KS.register(KS.op("move", "bottom-center"), [",:ctrl,cmd", "pad2:ctrl,cmd"]);
+KS.register(KS.op("move", "bottom-right"), [".:ctrl,cmd", "pad3:ctrl,cmd"]);
+KS.register(KS.op("move", "left"), ["j:ctrl,cmd", "pad4:ctrl,cmd"]);
+KS.register(KS.op("move", "center"), ["k:ctrl,cmd", "pad5:ctrl,cmd"]);
+KS.register(KS.op("move", "right"), ["l:ctrl,cmd", "pad6:ctrl,cmd"]);
+KS.register(KS.op('move', 'top-left'), ["u:ctrl,cmd", "pad7:ctrl,cmd"]);
+KS.register(KS.op("move", "top-center"), ["i:ctrl,cmd", "pad8:ctrl,cmd"]);
+KS.register(KS.op("move", "top-right"), ["o:ctrl,cmd", "pad9:ctrl,cmd"]);
 
-KS.register(KS.op("resize", "grow-vertical"), ["t:shift,ctrl,cmd"]);
-KS.register(KS.op("resize", "shrink-vertical"), ["y:shift,ctrl,cmd"]);
+KS.register(KS.op("resize", "grow"), ["g:ctrl,cmd"]);
+KS.register(KS.op("resize", "shrink"), ["s:ctrl,cmd"]);
 
-KS.register(KS.op("resize", "grow"), ["g:shift,ctrl,cmd"]);
-KS.register(KS.op("resize", "shrink"), ["h:shift,ctrl,cmd"]);
+KS.register(KS.op("resize", "grow-horizontal"), ["[:ctrl,cmd"]);
+KS.register(KS.op("resize", "shrink-horizontal"), ["[:shift,ctrl,cmd"]);
+KS.register(KS.op("resize", "full-width"), ["]:ctrl,cmd"]);
+KS.register(KS.op("resize", "half-width"), ["]:shift,ctrl,cmd"]);
 
-KS.register(KS.op("resize", "grow-horizontal"), ["b:shift,ctrl,cmd"]);
-KS.register(KS.op("resize", "shrink-horizontal"), ["n:shift,ctrl,cmd"]);
-
-KS.register(KS.op("resize", "full-height"), ["[:shift,ctrl,cmd"]);
-KS.register(KS.op("resize", "half-height"), ["[:ctrl,cmd"]);
-
-KS.register(KS.op("resize", "full-width"), ["]:shift,ctrl,cmd"]);
-KS.register(KS.op("resize", "half-width"), ["]:ctrl,cmd"]);
+KS.register(KS.op("resize", "grow-vertical"), [";:ctrl,cmd"]);
+KS.register(KS.op("resize", "shrink-vertical"), [";:shift,ctrl,cmd"]);
+KS.register(KS.op("resize", "full-height"), ["':ctrl,cmd"]);
+KS.register(KS.op("resize", "half-height"), ["':shift,ctrl,cmd"]);
 
 // Bind All. NOTE: some of these may *not* work if you have not
 // removed the expose/spaces/mission control bindings.
 S.bnda({
-        // // resize top left corner
-        // "right:ctrl" : S.op("resize", { "width" : "-10%", "height" : "+0", "anchor" : "bottom-right" }),
-        // "left:ctrl" : S.op("resize", { "width" : "+10%", "height" : "+0", "anchor" : "bottom-right" }),
-        // "up:ctrl" : S.op("resize", { "width" : "+0", "height" : "+10%", "anchor" : "bottom-right" }),
-        // "down:ctrl" : S.op("resize", { "width" : "+0", "height" : "-10%", "anchor" : "bottom-right" }),
-        // // resize bottom right corner
-        // "up:alt" : S.op("resize", { "width" : "+0", "height" : "-10%" }),
-        // "down:alt" : S.op("resize", { "width" : "+0", "height" : "+10%" }),
-        // "left:alt" : S.op("resize", { "width" : "-10%", "height" : "+0" }),
-        // "right:alt" : S.op("resize", { "width" : "+10%", "height" : "+0" }),
-        // // move entire window
-        // "right:ctrl;alt" : S.op("nudge", { "x" : "+10%", "y" : "+0" }),
-        // "left:ctrl;alt" : S.op("nudge", { "x" : "-10%", "y" : "+0" }),
-        // "up:ctrl;alt" : S.op("nudge", { "x" : "+0", "y" : "-10%" }),
-        // "down:ctrl;alt" : S.op("nudge", { "x" : "+0", "y" : "+10%" }),
-        // // shove window to edge
-        // "right:ctrl;shift" : S.op("push", { "direction" : "right", "style" : "bar-resize:screenSizeX/2" }),
-        // "left:ctrl;shift" : S.op("push", { "direction" : "left", "style" : "bar-resize:screenSizeX/2" }),
-        // "up:ctrl;shift" : S.op("push", { "direction" : "up", "style" : "bar-resize:screenSizeY/2" }),
-        // "down:ctrl;shift" : S.op("push", { "direction" : "down", "style" : "bar-resize:screenSizeY/2" }),
-        // // // shove window to corner
-        // // "u:shift;ctrl;cmd" : topLeft,
-        // // "i:shift;ctrl;cmd" : topRight,
-        // // "j:shift;ctrl;cmd" : full, // all corners ;)
-        // // "n:shift;ctrl;cmd" : bottomLeft,
-        // // "m:shift;ctrl;cmd" : bottomRight,
         // // change which window is in focus
         // "right:cmd" : S.op("focus", { "direction" : "right" }),
         // "left:cmd" : S.op("focus", { "direction" : "left" }),
