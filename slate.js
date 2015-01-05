@@ -123,7 +123,7 @@ var flubber = function(op) {
                 }
                 // NOTE: some windows have discrete sizes; for best
                 // adherence to edges, need to resize, then snap.
-                window.doop("move", restrict(rect, visible);
+                window.doop("move", restrict(rect, visible));
                 snap(window, visible, edge);
         };
 };
