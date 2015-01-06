@@ -44,34 +44,36 @@ var KS = (function(S) {
                 return rect;
         };
         var resize = function(param, rect, visible) {
+                var dx = Math.round(visible.width * 0.05);
+                var dy = Math.round(visible.height * 0.05);
                 switch (param) {
                 case "grow":
-                        rect.x -= Math.round(rect.width * 0.05);
-                        rect.y -= Math.round(rect.height * 0.05);
-                        rect.width = Math.round(rect.width * 1.1);
-                        rect.height = Math.round(rect.height * 1.1);
+                        rect.x -= dx;
+                        rect.width += 2 * dx;
+                        rect.y -= dy;
+                        rect.height += 2 * dy;
                         break;
                 case "grow-horizontal":
-                        rect.x -= Math.round(rect.width * 0.05);
-                        rect.width = Math.round(rect.width * 1.1);
+                        rect.x -= dx;
+                        rect.width += 2 * dx;
                         break;
                 case "grow-vertical":
-                        rect.y -= Math.round(rect.height * 0.05);
-                        rect.height = Math.round(rect.height * 1.1);
+                        rect.y -= dy;
+                        rect.height += 2 * dy;
                         break;
                 case "shrink":
-                        rect.x += Math.round(rect.width * 0.05);
-                        rect.y += Math.round(rect.height * 0.05);
-                        rect.width = Math.round(rect.width * 0.9);
-                        rect.height = Math.round(rect.height * 0.9);
+                        rect.x += dx;
+                        rect.width -= 2 * dx;
+                        rect.y += dy;
+                        rect.height -= 2 * dy;
                         break;
                 case "shrink-horizontal":
-                        rect.x += Math.round(rect.width * 0.05);
-                        rect.width = Math.round(rect.width * 0.9);
+                        rect.x += dx;
+                        rect.width -= 2 * dx;
                         break;
                 case "shrink-vertical":
-                        rect.y += Math.round(rect.height * 0.05);
-                        rect.height = Math.round(rect.height * 0.9);
+                        rect.y += dy;
+                        rect.height -= 2 * dy;
                         break;
                 case "full-height":
                         rect.height = visible.height;
@@ -88,6 +90,7 @@ var KS = (function(S) {
                 default:
                         S.log("[SLATE] cannot resize in unknown direction: " + param);
                 }
+                // TODO: normalize on 5% size of visible
                 return rect;
         };
         var restrictRectToVisible = function(rect, visible) {
