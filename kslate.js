@@ -7,36 +7,36 @@ var KS = (function(S) {
                         rect.y = visible.y;
                         break;
                 case "top-center":
-                        rect.x = (visible.x + visible.width) / 2 - rect.width / 2;
+                        rect.x = (visible.x + visible.width - rect.width) / 2;
                         rect.y = visible.y;
                         break;
                 case "top-right":
-                        rect.x = (visible.x + visible.width) - rect.width;
+                        rect.x = visible.x + visible.width - rect.width;
                         rect.y = visible.y;
                         break;
                 case "left":
                         rect.x = visible.x;
-                        rect.y = (visible.y + visible.height) / 2 - rect.height / 2;
+                        rect.y = (visible.y + visible.height - rect.height) / 2;
                         break;
                 case "center":
-                        rect.x = (visible.x + visible.width) / 2 - rect.width / 2;
-                        rect.y = (visible.y + visible.height) / 2 - rect.height / 2;
+                        rect.x = (visible.x + visible.width - rect.width) / 2;
+                        rect.y = (visible.y + visible.height - rect.height) / 2;
                         break;
                 case "right":
-                        rect.x = (visible.x + visible.width) - rect.width;
-                        rect.y = (visible.y + visible.height) / 2 - rect.height / 2;
+                        rect.x = visible.x + visible.width - rect.width;
+                        rect.y = (visible.y + visible.height - rect.height) / 2;
                         break;
                 case "bottom-left":
                         rect.x = visible.x;
-                        rect.y = (visible.y + visible.height) - rect.height;
+                        rect.y = visible.y + visible.height - rect.height;
                         break;
                 case "bottom-center":
-                        rect.x = (visible.x + visible.width) / 2 - rect.width / 2;
-                        rect.y = (visible.y + visible.height) - rect.height;
+                        rect.x = (visible.x + visible.width - rect.width) / 2;
+                        rect.y = visible.y + visible.height - rect.height;
                         break;
                 case "bottom-right":
-                        rect.x = (visible.x + visible.width) - rect.width;
-                        rect.y = (visible.y + visible.height) - rect.height;
+                        rect.x = visible.x + visible.width - rect.width;
+                        rect.y = visible.y + visible.height - rect.height;
                         break;
                 default:
                         S.log("[SLATE] cannot move in unknown direction: " + param);
@@ -164,7 +164,7 @@ var KS = (function(S) {
         };
         that.op = function(op, param) {
                 return function(window) {
-                        S.log("[SLATE] operation: " + op + "; param: " + param + "; window: " + JSON.stringify(window.title()));
+                        S.log("[SLATE] operation: " + op + "; param: " + param);
                         var visible = S.screen().visibleRect();
                         var rect = window.rect();
                         switch (op) {
