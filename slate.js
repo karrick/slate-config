@@ -27,25 +27,25 @@ KS.register(KS.op("resize", "half-height"), ["up:shift,ctrl,cmd"]);
 // Bind All. NOTE: some of these may *not* work if you have not
 // removed the expose/spaces/mission control bindings.
 S.bnda({
-        // // change which window is in focus
-        // "right:cmd" : S.op("focus", { "direction" : "right" }),
-        // "left:cmd" : S.op("focus", { "direction" : "left" }),
-        // "up:cmd" : S.op("focus", { "direction" : "up" }),
-        // "down:cmd" : S.op("focus", { "direction" : "down" }),
-        // // Window Hints
-        // "esc:cmd" : S.op("hint"),
+    // // change which window is in focus
+    // "right:cmd" : S.op("focus", { "direction" : "right" }),
+    // "left:cmd" : S.op("focus", { "direction" : "left" }),
+    // "up:cmd" : S.op("focus", { "direction" : "up" }),
+    // "down:cmd" : S.op("focus", { "direction" : "down" }),
+    // // Window Hints
+    // "esc:cmd" : S.op("hint"),
 
-        // Grid
-        "esc:ctrl" : S.op("grid")
+    // Grid
+    "esc:ctrl" : S.op("grid")
 });
 
 // Configs
 S.cfga({
-        "defaultToCurrentScreen" : true,
-        "secondsBetweenRepeat" : 0.5,
-        "checkDefaultsOnLoad" : true,
-        "focusCheckWidthMax" : 3000,
-        "orderScreensLeftToRight" : true
+    "defaultToCurrentScreen" : true,
+    "secondsBetweenRepeat" : 0.5,
+    "checkDefaultsOnLoad" : true,
+    "focusCheckWidthMax" : 3000,
+    "orderScreensLeftToRight" : true
 });
 
 // Log that we're done configuring
