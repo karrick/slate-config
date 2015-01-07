@@ -27,6 +27,11 @@ KS.register(KS.op("resize", "half-height"), ["up:shift,ctrl,cmd"]);
 // Bind All. NOTE: some of these may *not* work if you have not
 // removed the expose/spaces/mission control bindings.
 S.bnda({
+    "c:ctrl,cmd" : S.op("focus", { "app" : "LimeChat" }),
+    "e:ctrl,cmd" : S.op("focus", { "app" : "Emacs" }),
+    "t:ctrl,cmd" : S.op("focus", { "app" : "Terminal" }),
+    // "w:ctrl,cmd" : S.op("focus", { "app" : "Chrome" }),
+
     // // change which window is in focus
     // "right:cmd" : S.op("focus", { "direction" : "right" }),
     // "left:cmd" : S.op("focus", { "direction" : "left" }),
