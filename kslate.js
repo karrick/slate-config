@@ -1,7 +1,26 @@
 /*jslint sloppy: true, vars: true */
 var KS = (function (S) {
     var that = {};
-    var move = function (param, rect, visible) {
+    var nudge = function (param, rect, amount) {
+        switch (param) {
+        case "left":
+            rect.x -= amount;
+            break;
+        case "right":
+            rect.x += amount;
+            break;
+        case "up":
+            rect.y -= amount;
+            break;
+        case "down":
+            rect.y += amount;
+            break;
+        default:
+            S.log("[SLATE] cannot nudge in unknown direction: " + param);
+        }
+        return rect;
+    };
+    var position = function (param, rect, visible) {
         switch (param) {
         case "top-left":
             rect.x = visible.x;
@@ -44,9 +63,7 @@ var KS = (function (S) {
         }
         return rect;
     };
-    var resize = function (param, rect, visible) {
-        var dx = Math.round(visible.width * 0.05);
-        var dy = Math.round(visible.height * 0.05);
+    var resize = function (param, rect, visible, dx, dy) {
         switch (param) {
         case "grow":
             rect.x -= dx;
@@ -163,20 +180,31 @@ var KS = (function (S) {
             S.bind(keystroke, op);
         });
     };
-    that.op = function (op, param) {
+    that.op = function (op, param, factor) {
         return function (window) {
             S.log("[SLATE] operation: " + op + "; param: " + param);
             var visible = S.screen().visibleRect();
             var rect = window.rect();
             switch (op) {
-            case "move":
-                rect = move(param, rect, visible);
+            case "nudge":
+                var amount = 100;
+                rect = nudge(param, rect, amount);
+                rect = restrictRectToVisible(rect, visible);
+                window.doop("move", rect);
+                break;
+            case "position":
+                rect = position(param, rect, visible);
                 rect = restrictRectToVisible(rect, visible);
                 window.doop("move", rect);
                 break;
             case "resize":
                 snapWhenDone(window, function () {
-                    rect = resize(param, rect, visible);
+                    if (factor === undefined) {
+                        factor = 0.05;
+                    }
+                    var dx = Math.round(visible.width * factor);
+                    var dy = Math.round(visible.height * factor);
+                    rect = resize(param, rect, visible, dx, dy);
                     rect = restrictRectToVisible(rect, visible);
                     window.doop("move", rect);
                 });
