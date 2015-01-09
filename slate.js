@@ -1,28 +1,35 @@
 // load KS library
 S.src(".kslate.js", true);
 
-KS.register(KS.op("move", "bottom-left"), ["m:ctrl,cmd", "pad1:ctrl,cmd"]);
-KS.register(KS.op("move", "bottom-center"), [",:ctrl,cmd", "pad2:ctrl,cmd"]);
-KS.register(KS.op("move", "bottom-right"), [".:ctrl,cmd", "pad3:ctrl,cmd"]);
-KS.register(KS.op("move", "left"), ["j:ctrl,cmd", "pad4:ctrl,cmd"]);
-KS.register(KS.op("move", "center"), ["k:ctrl,cmd", "pad5:ctrl,cmd"]);
-KS.register(KS.op("move", "right"), ["l:ctrl,cmd", "pad6:ctrl,cmd"]);
-KS.register(KS.op('move', 'top-left'), ["u:ctrl,cmd", "pad7:ctrl,cmd"]);
-KS.register(KS.op("move", "top-center"), ["i:ctrl,cmd", "pad8:ctrl,cmd"]);
-KS.register(KS.op("move", "top-right"), ["o:ctrl,cmd", "pad9:ctrl,cmd"]);
+KS.register(KS.op("position", "bottom-left"), ["m:ctrl,cmd", "pad1:ctrl,cmd"]);
+KS.register(KS.op("position", "bottom-center"), [",:ctrl,cmd", "pad2:ctrl,cmd"]);
+KS.register(KS.op("position", "bottom-right"), [".:ctrl,cmd", "pad3:ctrl,cmd"]);
+KS.register(KS.op("position", "left"), ["j:ctrl,cmd", "pad4:ctrl,cmd"]);
+KS.register(KS.op("position", "center"), ["k:ctrl,cmd", "pad5:ctrl,cmd"]);
+KS.register(KS.op("position", "right"), ["l:ctrl,cmd", "pad6:ctrl,cmd"]);
+KS.register(KS.op('position', 'top-left'), ["u:ctrl,cmd", "pad7:ctrl,cmd"]);
+KS.register(KS.op("position", "top-center"), ["i:ctrl,cmd", "pad8:ctrl,cmd"]);
+KS.register(KS.op("position", "top-right"), ["o:ctrl,cmd", "pad9:ctrl,cmd"]);
+
+KS.register(KS.op("nudge", "left"), ["left:ctrl,cmd"]);
+KS.register(KS.op("nudge", "right"), ["right:ctrl,cmd"]);
+KS.register(KS.op("nudge", "up"), ["up:ctrl,cmd"]);
+KS.register(KS.op("nudge", "down"), ["down:ctrl,cmd"]);
+
+KS.register(KS.op("resize", "grow-horizontal"), ["right:shift,ctrl,cmd"]);
+KS.register(KS.op("resize", "shrink-horizontal"), ["left:shift,ctrl,cmd"]);
+
+KS.register(KS.op("resize", "grow-vertical"), ["down:shift,ctrl,cmd"]);
+KS.register(KS.op("resize", "shrink-vertical"), ["up:shift,ctrl,cmd"]);
+
+KS.register(KS.op("resize", "full-width"), ["right:ctrl,alt,cmd"]);
+KS.register(KS.op("resize", "half-width"), ["left:ctrl,alt,cmd"]);
+
+KS.register(KS.op("resize", "full-height"), ["down:ctrl,alt,cmd"]);
+KS.register(KS.op("resize", "half-height"), ["up:ctrl,alt,cmd"]);
 
 KS.register(KS.op("resize", "grow"), ["g:ctrl,cmd"]);
 KS.register(KS.op("resize", "shrink"), ["s:ctrl,cmd"]);
-
-KS.register(KS.op("resize", "grow-horizontal"), ["right:ctrl,cmd"]);
-KS.register(KS.op("resize", "shrink-horizontal"), ["left:ctrl,cmd"]);
-KS.register(KS.op("resize", "full-width"), ["right:shift,ctrl,cmd"]);
-KS.register(KS.op("resize", "half-width"), ["left:shift,ctrl,cmd"]);
-
-KS.register(KS.op("resize", "grow-vertical"), ["down:ctrl,cmd"]);
-KS.register(KS.op("resize", "shrink-vertical"), ["up:ctrl,cmd"]);
-KS.register(KS.op("resize", "full-height"), ["down:shift,ctrl,cmd"]);
-KS.register(KS.op("resize", "half-height"), ["up:shift,ctrl,cmd"]);
 
 // Bind All. NOTE: some of these may *not* work if you have not
 // removed the expose/spaces/mission control bindings.
