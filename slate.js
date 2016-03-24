@@ -25,8 +25,8 @@ KS.register(KS.op("resize", "shrink-vertical"), ["down:shift,ctrl,cmd"]);
 KS.register(KS.op("resize", "full-width"), ["right:ctrl,alt,cmd"]);
 KS.register(KS.op("resize", "half-width"), ["left:ctrl,alt,cmd"]);
 
-KS.register(KS.op("resize", "full-height"), ["down:ctrl,alt,cmd"]);
-KS.register(KS.op("resize", "half-height"), ["up:ctrl,alt,cmd"]);
+KS.register(KS.op("resize", "full-height"), ["up:ctrl,alt,cmd"]);
+KS.register(KS.op("resize", "half-height"), ["down:ctrl,alt,cmd"]);
 
 KS.register(KS.op("resize", "grow"), ["g:ctrl,cmd"]);
 KS.register(KS.op("resize", "shrink"), ["s:ctrl,cmd"]);
