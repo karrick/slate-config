@@ -1,5 +1,5 @@
 // load KS library
-S.src(".kslate.js", true);
+S.src(".kslate.js");
 
 KS.register(KS.op("position", "bottom-left"), ["m:ctrl,cmd", "pad1:ctrl,cmd"]);
 KS.register(KS.op("position", "bottom-center"), [",:ctrl,cmd", "pad2:ctrl,cmd"]);
@@ -55,10 +55,7 @@ S.bnda({
 // Configs
 S.cfga({
     "defaultToCurrentScreen" : true,
-    "secondsBetweenRepeat" : 0.5,
-    "checkDefaultsOnLoad" : true,
-    "focusCheckWidthMax" : 3000,
-    "orderScreensLeftToRight" : true
+    "checkDefaultsOnLoad" : true
 });
 
 // Log that we're done configuring
