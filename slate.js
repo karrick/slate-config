@@ -36,6 +36,7 @@ KS.register(KS.op("resize", "shrink"), ["s:ctrl,cmd"]);
 S.bnda({
     "c:ctrl,cmd" : S.op("focus", { "app" : "Slack" }),
     "e:ctrl,cmd" : S.op("focus", { "app" : "Emacs" }),
+    "f:ctrl,cmd" : S.op("focus", { "app" : "Firefox" }),
     "p:ctrl,cmd" : S.op("focus", { "app" : "Safari Technology Preview" }),
     "t:ctrl,cmd" : S.op("focus", { "app" : "Terminal" }),
     "w:ctrl,cmd" : S.op("focus", { "app" : "Safari" }),
