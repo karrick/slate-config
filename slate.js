@@ -37,10 +37,10 @@ S.bnda({
     "b:ctrl,cmd" : S.op("focus", { "app" : "Blue Jeans" }),
     "c:ctrl,cmd" : S.op("focus", { "app" : "Slack" }),
     "e:ctrl,cmd" : S.op("focus", { "app" : "Emacs" }),
-    "f:ctrl,cmd" : S.op("focus", { "app" : "Firefox" }),
     "p:ctrl,cmd" : S.op("focus", { "app" : "Safari Technology Preview" }),
+    "q:ctrl,cmd" : S.op("focus", { "app" : "Microsoft Outlook" }),
     "t:ctrl,cmd" : S.op("focus", { "app" : "Terminal" }),
-    "w:ctrl,cmd" : S.op("focus", { "app" : "Safari" }),
+    "w:ctrl,cmd" : S.op("focus", { "app" : "Google Chrome" }),
 
     // // change which window is in focus
     // "right:cmd" : S.op("focus", { "direction" : "right" }),
