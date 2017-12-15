@@ -6,171 +6,196 @@ if (KS === undefined) KS = {};
     "use strict";
 
     Object.defineProperties(KS, {
-        nudge: {value: function (param, rect, amount) {
+        columns: {value: function (param, wr, svr) {
+            switch (param) {
+            case "full":
+                wr.width = svr.width;
+                wr.height = svr.height;
+                break;
+            case "one-half":
+                wr.width = svr.width / 2;
+                wr.height = svr.height;
+                break;
+            case "one-third":
+                wr.width = svr.width / 3;
+                wr.height = svr.height;
+                break;
+            case "one-quarter":
+                wr.width = svr.width / 4;
+                wr.height = svr.height;
+                break;
+            case "two-thirds":
+                wr.width = svr.width * 2 / 3;
+                wr.height = svr.height;
+                break;
+            case "three-quarters":
+                wr.width = svr.width * 3 / 4;
+                wr.height = svr.height;
+                break;
+            default:
+                S.log("[SLATE] cannot set to unknown column description: " + param);
+            }
+            return wr;
+        }},
+        nudge: {value: function (param, wr, pixels) {
             switch (param) {
             case "left":
-                rect.x -= amount;
+                wr.x -= pixels;
                 break;
             case "right":
-                rect.x += amount;
+                wr.x += pixels;
                 break;
             case "up":
-                rect.y -= amount;
+                wr.y -= pixels;
                 break;
             case "down":
-                rect.y += amount;
+                wr.y += pixels;
                 break;
             default:
                 S.log("[SLATE] cannot nudge in unknown direction: " + param);
             }
-            return rect;
+            return wr;
         }},
-        position: {value: function (param, rect, visible) {
+        position: {value: function (param, wr, svr) {
             switch (param) {
             case "top-left":
-                rect.x = visible.x;
-                rect.y = visible.y;
+                wr.x = svr.x;
+                wr.y = svr.y;
                 break;
             case "top-center":
-                rect.x = (visible.x + visible.width - rect.width) / 2;
-                rect.y = visible.y;
+                wr.x = (svr.width - wr.width) / 2 + svr.x;
+                wr.y = svr.y;
                 break;
             case "top-right":
-                rect.x = visible.x + visible.width - rect.width;
-                rect.y = visible.y;
+                wr.x = svr.x + svr.width - wr.width;
+                wr.y = svr.y;
                 break;
-            case "left":
-                rect.x = visible.x;
-                rect.y = (visible.y + visible.height - rect.height) / 2;
+            case "middle-left":
+                wr.x = svr.x;
+                wr.y = (svr.height - wr.height) / 2 + svr.y;
                 break;
-            case "center":
-                rect.x = (visible.x + visible.width - rect.width) / 2;
-                rect.y = (visible.y + visible.height - rect.height) / 2;
+            case "middle-center":
+                wr.x = (svr.width - wr.width) / 2 + svr.x;
+                wr.y = (svr.height - wr.height) / 2 + svr.y;
                 break;
-            case "right":
-                rect.x = visible.x + visible.width - rect.width;
-                rect.y = (visible.y + visible.height - rect.height) / 2;
+            case "middle-right":
+                wr.x = svr.x + svr.width - wr.width;
+                wr.y = (svr.height - wr.height) / 2 + svr.y;
                 break;
             case "bottom-left":
-                rect.x = visible.x;
-                rect.y = visible.y + visible.height - rect.height;
+                wr.x = svr.x;
+                wr.y = svr.y + svr.height - wr.height;
                 break;
             case "bottom-center":
-                rect.x = (visible.x + visible.width - rect.width) / 2;
-                rect.y = visible.y + visible.height - rect.height;
+                wr.x = (svr.width - wr.width) / 2 + svr.x;
+                wr.y = svr.y + svr.height - wr.height;
                 break;
             case "bottom-right":
-                rect.x = visible.x + visible.width - rect.width;
-                rect.y = visible.y + visible.height - rect.height;
+                wr.x = svr.x + svr.width - wr.width;
+                wr.y = svr.y + svr.height - wr.height;
                 break;
             default:
                 S.log("[SLATE] cannot move in unknown direction: " + param);
             }
-            return rect;
+            return wr;
         }},
-        resize: {value: function (param, rect, visible, dx, dy) {
+        resize: {value: function (param, wr, svr, dx, dy) {
             switch (param) {
             case "grow":
-                rect.x -= dx;
-                rect.width += 2 * dx;
-                rect.y -= dy;
-                rect.height += 2 * dy;
+                wr.x -= dx;
+                wr.width += 2 * dx;
+                wr.y -= dy;
+                wr.height += 2 * dy;
                 break;
             case "grow-horizontal":
-                rect.x -= dx;
-                rect.width += 2 * dx;
+                wr.x -= dx;
+                wr.width += 2 * dx;
                 break;
             case "grow-vertical":
-                rect.y -= dy;
-                rect.height += 2 * dy;
+                wr.y -= dy;
+                wr.height += 2 * dy;
                 break;
             case "shrink":
-                rect.x += dx;
-                rect.width -= 2 * dx;
-                rect.y += dy;
-                rect.height -= 2 * dy;
+                wr.x += dx;
+                wr.width -= 2 * dx;
+                wr.y += dy;
+                wr.height -= 2 * dy;
                 break;
             case "shrink-horizontal":
-                rect.x += dx;
-                rect.width -= 2 * dx;
+                wr.x += dx;
+                wr.width -= 2 * dx;
                 break;
             case "shrink-vertical":
-                rect.y += dy;
-                rect.height -= 2 * dy;
+                wr.y += dy;
+                wr.height -= 2 * dy;
                 break;
             case "full-height":
-                rect.height = visible.height;
+                wr.height = svr.height;
                 break;
             case "half-height":
-                rect.height = visible.height / 2;
+                wr.height = svr.height / 2;
                 break;
             case "full-width":
-                rect.width = visible.width;
+                wr.width = svr.width;
                 break;
             case "half-width":
-                rect.width = visible.width / 2;
+                wr.width = svr.width / 2;
                 break;
             default:
                 S.log("[SLATE] cannot resize in unknown direction: " + param);
             }
-            // TODO: normalize on 5% size of visible
-            return rect;
+            return wr;
         }},
-        restrictRectToVisible: {value: function (rect, visible) {
-            if (rect.width > visible.width) rect.width = visible.width;
-            if (rect.height > visible.height) rect.height = visible.height;
-            if (rect.x < visible.x) rect.x = visible.x;
-            if (rect.y < visible.y) rect.y = visible.y;
+        restrictRectToVisible: {value: function (wr, svr) {
+            if (wr.x < svr.x) wr.x = svr.x;
+            if (wr.y < svr.y) wr.y = svr.y;
+            if (wr.width > svr.width) wr.width = svr.width;
+            if (wr.height > svr.height) wr.height = svr.height;
 
-            var maxX = (visible.x + visible.width) - rect.width;
-            if (rect.x > maxX) rect.x = maxX;
+            var maxX = svr.x + svr.width - wr.width;
+            if (wr.x > maxX) wr.x = maxX;
 
-            var maxY = (visible.y + visible.height) - rect.height;
-            if (rect.y > maxY) rect.y = maxY;
+            var maxY = svr.y + svr.height - wr.height;
+            if (wr.y > maxY) wr.y = maxY;
 
-            return {"x" : rect.x, "y" : rect.y, "width" : rect.width, "height" : rect.height};
+            return wr;
         }},
-        whichEdge: {value: function (window, visible) {
+        snapWhenDone: {value: function (wr, svr, someFunction) {
+            var edge = KS.whichEdge(wr, svr);
+            wr = someFunction(wr);
+            if (edge !== undefined && edge !== '') {
+                if (edge.indexOf("top") !== -1) {
+                    wr.y = svr.y;
+                }
+                if (edge.indexOf("left") !== -1) {
+                    wr.x = svr.x;
+                }
+                if (edge.indexOf("bottom") !== -1) {
+                    wr.y = (svr.y + svr.height) - wr.height;
+                }
+                if (edge.indexOf("right") !== -1) {
+                    wr.x = (svr.x + svr.width) - wr.width;
+                }
+            }
+            return wr;
+        }},
+        whichEdge: {value: function (wr, svr) {
             // RESULT: top|topleft|topright|bottom|bottomleft|bottomright|left|right
-            var snapTolerance = 5;
+            var snapTolerance = 25;
             var result = '';
-            var rect = window.rect();
             // snapTop takes priority over snapBottom
-            if (rect.y <= visible.y + snapTolerance) {
+            if (wr.y <= svr.y + snapTolerance) {
                 result = 'top';
-            } else if (rect.y + rect.height + snapTolerance >= visible.y + visible.height) {
+            } else if (wr.y + wr.height + snapTolerance >= svr.y + svr.height) {
                 result = 'bottom';
             }
             // snapLeft takes priority over snapRight
-            if (rect.x <= visible.x + snapTolerance) {
+            if (wr.x <= svr.x + snapTolerance) {
                 result += 'left';
-            } else if (rect.x + rect.width + snapTolerance >= visible.x + visible.width) {
+            } else if (wr.x + wr.width + snapTolerance >= svr.x + svr.width) {
                 result += 'right';
             }
             return result;
-        }},
-        snapWindowToEdgeOfVisible: {value: function (window, visible, edge) {
-            if (edge !== undefined && edge !== '') {
-                var rect = window.rect();
-                if (edge.indexOf("top") !== -1) {
-                    rect.y = visible.y;
-                }
-                if (edge.indexOf("left") !== -1) {
-                    rect.x = visible.x;
-                }
-                if (edge.indexOf("bottom") !== -1) {
-                    rect.y = (visible.y + visible.height) - rect.height;
-                }
-                if (edge.indexOf("right") !== -1) {
-                    rect.x = (visible.x + visible.width) - rect.width;
-                }
-                window.doop("move", rect);
-            }
-        }},
-        snapWhenDone: {value: function (window, visible, someFunction) {
-            var edge = KS.whichEdge(window, visible);
-            someFunction(window);
-            KS.snapWindowToEdgeOfVisible(window, visible, edge);
         }},
         register: {enumerable: true, value: function (op, keystrokes) {
             keystrokes.forEach(function (keystroke) {
@@ -180,31 +205,30 @@ if (KS === undefined) KS = {};
         op: {enumerable: true, value: function (op, param, factor) {
             return function (window) {
                 S.log("[SLATE] operation: " + op + "; param: " + param);
-                var visible = S.screen().visibleRect();
-                var rect = window.rect();
+
+                var wr = window.rect();
+                var svr = window.screen().visibleRect();
+                // S.log("[SLATE] svr: " + JSON.stringify(svr));
+
                 switch (op) {
+                case "columns":
+                    window.doop("move", KS.snapWhenDone(wr, svr, function () {return KS.columns(param, wr, svr);}));
+                    break;
                 case "nudge":
-                    var amount = 100;
-                    rect = KS.nudge(param, rect, amount);
-                    rect = KS.restrictRectToVisible(rect, visible);
-                    window.doop("move", rect);
+                    window.doop("move", KS.restrictRectToVisible(KS.nudge(param, wr, /* pixels: */ 100), svr));
                     break;
                 case "position":
-                    rect = KS.position(param, rect, visible);
-                    rect = KS.restrictRectToVisible(rect, visible);
-                    window.doop("move", rect);
+                    window.doop("move", KS.position(param, wr, svr));
                     break;
                 case "resize":
-                    KS.snapWhenDone(window, visible, function () {
+                    window.doop("move", KS.snapWhenDone(wr, svr, function () {
                         if (factor === undefined) {
                             factor = 0.05;
                         }
-                        var dx = Math.round(visible.width * factor);
-                        var dy = Math.round(visible.height * factor);
-                        rect = KS.resize(param, rect, visible, dx, dy);
-                        rect = KS.restrictRectToVisible(rect, visible);
-                        window.doop("move", rect);
-                    });
+                        var dx = Math.round(svr.width * factor);
+                        var dy = Math.round(svr.height * factor);
+                        return KS.restrictRectToVisible(KS.resize(param, wr, svr, dx, dy), svr);
+                    }));
                     break;
                 default:
                     S.log("[SLATE] cannot perform unknown operation: " + op);

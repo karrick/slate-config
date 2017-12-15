@@ -1,15 +1,28 @@
 // load KS library
 S.src(".kslate.js");
 
-KS.register(KS.op("position", "bottom-left"), ["m:ctrl,cmd", "pad1:ctrl,cmd"]);
-KS.register(KS.op("position", "bottom-center"), [",:ctrl,cmd", "pad2:ctrl,cmd"]);
-KS.register(KS.op("position", "bottom-right"), [".:ctrl,cmd", "pad3:ctrl,cmd"]);
-KS.register(KS.op("position", "left"), ["j:ctrl,cmd", "pad4:ctrl,cmd"]);
-KS.register(KS.op("position", "center"), ["k:ctrl,cmd", "pad5:ctrl,cmd"]);
-KS.register(KS.op("position", "right"), ["l:ctrl,cmd", "pad6:ctrl,cmd"]);
+KS.register(KS.op("columns", "full"), ["1:ctrl,cmd"]);
+KS.register(KS.op("columns", "one-half"), ["2:ctrl,cmd"]);
+KS.register(KS.op("columns", "one-third"), ["3:ctrl,cmd"]);
+KS.register(KS.op("columns", "one-quarter"), ["4:ctrl,cmd"]);
+// 5
+KS.register(KS.op("columns", "two-thirds"), ["6:ctrl,cmd"]);
+KS.register(KS.op("columns", "three-quarters"), ["7:ctrl,cmd"]);
+// 8
+// 9
+// 0
+
 KS.register(KS.op('position', 'top-left'), ["u:ctrl,cmd", "pad7:ctrl,cmd"]);
 KS.register(KS.op("position", "top-center"), ["i:ctrl,cmd", "pad8:ctrl,cmd"]);
 KS.register(KS.op("position", "top-right"), ["o:ctrl,cmd", "pad9:ctrl,cmd"]);
+
+KS.register(KS.op("position", "middle-left"), ["j:ctrl,cmd", "pad4:ctrl,cmd"]);
+KS.register(KS.op("position", "middle-center"), ["k:ctrl,cmd", "pad5:ctrl,cmd"]);
+KS.register(KS.op("position", "middle-right"), ["l:ctrl,cmd", "pad6:ctrl,cmd"]);
+
+KS.register(KS.op("position", "bottom-left"), ["m:ctrl,cmd", "pad1:ctrl,cmd"]);
+KS.register(KS.op("position", "bottom-center"), [",:ctrl,cmd", "pad2:ctrl,cmd"]);
+KS.register(KS.op("position", "bottom-right"), [".:ctrl,cmd", "pad3:ctrl,cmd"]);
 
 KS.register(KS.op("nudge", "left"), ["left:ctrl,cmd"]);
 KS.register(KS.op("nudge", "right"), ["right:ctrl,cmd"]);
@@ -22,8 +35,8 @@ KS.register(KS.op("resize", "shrink-horizontal"), ["left:shift,ctrl,cmd"]);
 KS.register(KS.op("resize", "grow-vertical"), ["up:shift,ctrl,cmd"]);
 KS.register(KS.op("resize", "shrink-vertical"), ["down:shift,ctrl,cmd"]);
 
-KS.register(KS.op("resize", "full-width"), ["right:ctrl,alt,cmd"]);
-KS.register(KS.op("resize", "half-width"), ["left:ctrl,alt,cmd"]);
+// KS.register(KS.op("resize", "full-width"), ["right:ctrl,alt,cmd"]);
+// KS.register(KS.op("resize", "half-width"), ["left:ctrl,alt,cmd"]);
 
 KS.register(KS.op("resize", "full-height"), ["up:ctrl,alt,cmd"]);
 KS.register(KS.op("resize", "half-height"), ["down:ctrl,alt,cmd"]);
@@ -40,7 +53,7 @@ S.bnda({
     "p:ctrl,cmd" : S.op("focus", { "app" : "Safari Technology Preview" }),
     "q:ctrl,cmd" : S.op("focus", { "app" : "Microsoft Outlook" }),
     "t:ctrl,cmd" : S.op("focus", { "app" : "Terminal" }),
-    "w:ctrl,cmd" : S.op("focus", { "app" : "Google Chrome" }),
+    "w:ctrl,cmd" : S.op("focus", { "app" : "Firefox" }),
 
     // // change which window is in focus
     // "right:cmd" : S.op("focus", { "direction" : "right" }),
@@ -48,14 +61,14 @@ S.bnda({
     // "up:cmd" : S.op("focus", { "direction" : "up" }),
     // "down:cmd" : S.op("focus", { "direction" : "down" }),
     // // Window Hints
-    // "esc:cmd" : S.op("hint"),
+    // "esc:cmd" : S.op("hint")
 
     // Grid
-    "esc:ctrl" : S.op("grid")
+    // "esc:ctrl" : S.op("grid")
 });
 
 // Configs
-S.cfga({
+S.configAll({
     "defaultToCurrentScreen" : true,
     "checkDefaultsOnLoad" : true
 });
