@@ -47,6 +47,10 @@ KS.register(KS.op("resize", "shrink"), ["s:ctrl,cmd"]);
 // Bind All. NOTE: some of these may *not* work if you have not
 // removed the expose/spaces/mission control bindings.
 S.bnda({
+    "-:ctrl,cmd": S.op("relaunch"),
+
+    "tab:ctrl,cmd": S.op("switch"),
+
     "b:ctrl,cmd" : S.op("focus", { "app" : "Blue Jeans" }),
     "c:ctrl,cmd" : S.op("focus", { "app" : "Slack" }),
     "e:ctrl,cmd" : S.op("focus", { "app" : "Emacs" }),
@@ -55,13 +59,14 @@ S.bnda({
     "t:ctrl,cmd" : S.op("focus", { "app" : "Terminal" }),
     "w:ctrl,cmd" : S.op("focus", { "app" : "Firefox" }),
 
-    // // change which window is in focus
-    // "right:cmd" : S.op("focus", { "direction" : "right" }),
-    // "left:cmd" : S.op("focus", { "direction" : "left" }),
-    // "up:cmd" : S.op("focus", { "direction" : "up" }),
-    // "down:cmd" : S.op("focus", { "direction" : "down" }),
-    // // Window Hints
-    // "esc:cmd" : S.op("hint")
+    // change which window is in focus
+    "right:cmd" : S.op("focus", { "direction" : "right" }),
+    "left:cmd" : S.op("focus", { "direction" : "left" }),
+    "up:cmd" : S.op("focus", { "direction" : "up" }),
+    "down:cmd" : S.op("focus", { "direction" : "down" }),
+
+    // Window Hints
+    "esc:cmd" : S.op("hint")
 
     // Grid
     // "esc:ctrl" : S.op("grid")
