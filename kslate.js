@@ -8,12 +8,20 @@ if (KS === undefined) KS = {};
     Object.defineProperties(KS, {
         columns: {value: function (param, wr, svr) {
             switch (param) {
+            case "40":
+                wr.width = svr.width * 0.4;
+                wr.height = svr.height;
+                break;
+            case "60":
+                wr.width = svr.width * 0.6;
+                wr.height = svr.height;
+                break;
             case "full":
                 wr.width = svr.width;
                 wr.height = svr.height;
                 break;
             case "one-half":
-                wr.width = svr.width / 2;
+                wr.width = svr.width >> 1;
                 wr.height = svr.height;
                 break;
             case "one-third":
@@ -21,7 +29,7 @@ if (KS === undefined) KS = {};
                 wr.height = svr.height;
                 break;
             case "one-quarter":
-                wr.width = svr.width / 4;
+                wr.width = svr.width >> 2;
                 wr.height = svr.height;
                 break;
             case "two-thirds":
@@ -29,7 +37,7 @@ if (KS === undefined) KS = {};
                 wr.height = svr.height;
                 break;
             case "three-quarters":
-                wr.width = svr.width * 3 / 4;
+                wr.width = (svr.width >> 2) * 3;
                 wr.height = svr.height;
                 break;
             default:
@@ -103,43 +111,43 @@ if (KS === undefined) KS = {};
             switch (param) {
             case "grow":
                 wr.x -= dx;
-                wr.width += 2 * dx;
+                wr.width += dx << 1;
                 wr.y -= dy;
-                wr.height += 2 * dy;
+                wr.height += dy << 1;
                 break;
             case "grow-horizontal":
                 wr.x -= dx;
-                wr.width += 2 * dx;
+                wr.width += dx << 1;
                 break;
             case "grow-vertical":
                 wr.y -= dy;
-                wr.height += 2 * dy;
+                wr.height += dy << 1;
                 break;
             case "shrink":
                 wr.x += dx;
-                wr.width -= 2 * dx;
+                wr.width -= dx << 1;
                 wr.y += dy;
-                wr.height -= 2 * dy;
+                wr.height -= dy << 1;
                 break;
             case "shrink-horizontal":
                 wr.x += dx;
-                wr.width -= 2 * dx;
+                wr.width -= dx << 1;
                 break;
             case "shrink-vertical":
                 wr.y += dy;
-                wr.height -= 2 * dy;
+                wr.height -= dy << 1;
                 break;
             case "full-height":
                 wr.height = svr.height;
                 break;
             case "half-height":
-                wr.height = svr.height / 2;
+                wr.height = svr.height >> 1;
                 break;
             case "full-width":
                 wr.width = svr.width;
                 break;
             case "half-width":
-                wr.width = svr.width / 2;
+                wr.width = svr.width >> 1;
                 break;
             default:
                 S.log("[SLATE] cannot resize in unknown direction: " + param);
@@ -233,6 +241,46 @@ if (KS === undefined) KS = {};
                 default:
                     S.log("[SLATE] cannot perform unknown operation: " + op);
                     return;
+                }
+            };
+        }},
+        mode: {enumerable: true, value: function(mode) {
+            return function(window) {
+                // S.log("[SLATE] mode: " + mode);
+                var wr = window.rect();
+                var svr = window.screen().visibleRect();
+
+                switch (mode) {
+                case "full-screen":
+                    // top-left
+                    wr.x = svr.x;
+                    wr.y = svr.y;
+                    // full screen
+                    wr.width = svr.width;
+                    wr.height = svr.height;
+                    window.doop("move", wr);
+                    break;
+                case "left-side":
+                    // 40% wide; full height
+                    wr.width = svr.width >> 1;
+                    wr.height = svr.height;
+                    // top-left
+                    wr.x = svr.x;
+                    wr.y = svr.y;
+                    window.doop("move", wr);
+                    break;
+                case "right-side":
+                    // 60% wide; full height
+                    wr.width = svr.width >> 1;
+                    wr.height = svr.height;
+                    // top-right
+                    wr.x = svr.x + svr.width - wr.width;
+                    wr.y = svr.y;
+                    window.doop("move", wr);
+                    break;
+                default:
+                    S.log("[SLATE] cannot perform unknown mode operation: " + mode);
+                    break;
                 }
             };
         }}
