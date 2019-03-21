@@ -1,12 +1,18 @@
 // load KS library
 S.src(".kslate.js");
 
-// move this window to focus, left, or right
-KS.register(KS.mode("full-screen"), ["1:ctrl,cmd"]);
-KS.register(KS.mode("left-half"), ["2:ctrl,cmd"]);
-KS.register(KS.mode("right-half"), ["3:ctrl,cmd"]);
-KS.register(KS.mode("top-half"), ["4:ctrl,cmd"]);
-KS.register(KS.mode("bottom-half"), ["5:ctrl,cmd"]);
+KS.register(KS.mode("top-left"), ["1:ctrl,cmd"]);
+KS.register(KS.mode("top-half"), ["2:ctrl,cmd"]);
+KS.register(KS.mode("top-right"), ["3:ctrl,cmd"]);
+
+KS.register(KS.mode("left-side"), ["4:ctrl,cmd"]);
+KS.register(KS.mode("full-screen"), ["5:ctrl,cmd"]);
+KS.register(KS.mode("right-side"), ["6:ctrl,cmd"]);
+
+KS.register(KS.mode("bottom-left"), ["7:ctrl,cmd"]);
+KS.register(KS.mode("bottom-half"), ["8:ctrl,cmd"]);
+KS.register(KS.mode("bottom-right"), ["9:ctrl,cmd"]);
+
 
 KS.register(KS.op("nudge", "left"), ["left:ctrl,cmd"]);
 KS.register(KS.op("nudge", "right"), ["right:ctrl,cmd"]);
