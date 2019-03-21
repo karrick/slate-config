@@ -2,32 +2,11 @@
 S.src(".kslate.js");
 
 // move this window to focus, left, or right
-KS.register(KS.mode("full-screen"), ["f:ctrl,cmd"]);
-KS.register(KS.mode("right-side"), ["r:ctrl,cmd"]);
-KS.register(KS.mode("left-side"), ["l:ctrl,cmd"]);
-
-KS.register(KS.op("columns", "full"), ["1:ctrl,cmd"]);
-KS.register(KS.op("columns", "one-half"), ["2:ctrl,cmd"]);
-KS.register(KS.op("columns", "one-third"), ["3:ctrl,cmd"]);
-// KS.register(KS.op("columns", "one-quarter"), ["4:ctrl,cmd"]);
-// 5
-// KS.register(KS.op("columns", "two-thirds"), ["6:ctrl,cmd"]);
-KS.register(KS.op("columns", "three-quarters"), ["7:ctrl,cmd"]);
-// 8
-// 9
-// 0
-
-KS.register(KS.op('position', 'top-left'), ["u:ctrl,cmd", "pad7:ctrl,cmd"]);
-KS.register(KS.op("position", "top-center"), ["i:ctrl,cmd", "pad8:ctrl,cmd"]);
-KS.register(KS.op("position", "top-right"), ["o:ctrl,cmd", "pad9:ctrl,cmd"]);
-
-KS.register(KS.op("position", "middle-left"), ["j:ctrl,cmd", "pad4:ctrl,cmd"]);
-KS.register(KS.op("position", "middle-center"), ["k:ctrl,cmd", "pad5:ctrl,cmd"]);
-// KS.register(KS.op("position", "middle-right"), ["l:ctrl,cmd", "pad6:ctrl,cmd"]);
-
-KS.register(KS.op("position", "bottom-left"), ["m:ctrl,cmd", "pad1:ctrl,cmd"]);
-KS.register(KS.op("position", "bottom-center"), [",:ctrl,cmd", "pad2:ctrl,cmd"]);
-KS.register(KS.op("position", "bottom-right"), [".:ctrl,cmd", "pad3:ctrl,cmd"]);
+KS.register(KS.mode("full-screen"), ["1:ctrl,cmd"]);
+KS.register(KS.mode("left-half"), ["2:ctrl,cmd"]);
+KS.register(KS.mode("right-half"), ["3:ctrl,cmd"]);
+KS.register(KS.mode("top-half"), ["4:ctrl,cmd"]);
+KS.register(KS.mode("bottom-half"), ["5:ctrl,cmd"]);
 
 KS.register(KS.op("nudge", "left"), ["left:ctrl,cmd"]);
 KS.register(KS.op("nudge", "right"), ["right:ctrl,cmd"]);
@@ -59,13 +38,13 @@ S.bnda({
 
     "tab:ctrl,cmd": S.op("switch"),
 
-    "b:ctrl,cmd" : S.op("focus", { "app" : "Blue Jeans" }),
+    // "b:ctrl,cmd" : S.op("focus", { "app" : "Blue Jeans" }),
     "c:ctrl,cmd" : S.op("focus", { "app" : "Slack" }),
     "e:ctrl,cmd" : S.op("focus", { "app" : "Emacs" }),
     // "p:ctrl,cmd" : S.op("focus", { "app" : "Safari Technology Preview" }),
-    "q:ctrl,cmd" : S.op("focus", { "app" : "Microsoft Outlook" }),
-    "t:ctrl,cmd" : S.op("focus", { "app" : "iTerm2" }),
-    "w:ctrl,cmd" : S.op("focus", { "app" : "Firefox" }),
+    "o:ctrl,cmd" : S.op("focus", { "app" : "Microsoft Outlook" }),
+    "i:ctrl,cmd" : S.op("focus", { "app" : "iTerm2" }),
+    "f:ctrl,cmd" : S.op("focus", { "app" : "Firefox" }),
 
     // change which window is in focus
     "right:cmd" : S.op("focus", { "direction" : "right" }),
