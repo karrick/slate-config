@@ -252,30 +252,40 @@ if (KS === undefined) KS = {};
 
                 switch (mode) {
                 case "full-screen":
-                    // top-left
+                    // position: top-left
                     wr.x = svr.x;
                     wr.y = svr.y;
-                    // full screen
+                    // size: full screen
                     wr.width = svr.width;
                     wr.height = svr.height;
                     window.doop("move", wr);
                     break;
-                case "left-side":
-                    // 40% wide; full height
-                    wr.width = svr.width >> 1;
-                    wr.height = svr.height;
-                    // top-left
+                case "left-half":
+                    // position: top-left
                     wr.x = svr.x;
                     wr.y = svr.y;
-                    window.doop("move", wr);
-                    break;
-                case "right-side":
-                    // 60% wide; full height
+                    // size: half width; full height
                     wr.width = svr.width >> 1;
                     wr.height = svr.height;
-                    // top-right
+                    window.doop("move", wr);
+                    break;
+                case "right-half":
+                    // position: top-right
                     wr.x = svr.x + svr.width - wr.width;
                     wr.y = svr.y;
+                    // size: half width; full height
+                    wr.width = svr.width >> 1;
+                    wr.height = svr.height;
+                    window.doop("move", wr);
+                    break;
+                case "top-half":
+                    wr.y = svr.y;
+                    wr.height = svr.height >> 1;
+                    window.doop("move", wr);
+                    break;
+                case "bottom-half":
+                    wr.height = svr.height >> 1;
+                    wr.y = svr.y + svr.height - wr.height;
                     window.doop("move", wr);
                     break;
                 default:
