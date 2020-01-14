@@ -293,6 +293,13 @@ if (KS === undefined) KS = {};
                     wr.x = svr.x + svr.width - wr.width; // right-side
                     window.doop("move", wr);
                     break;
+                case "right-two-thirds":
+                    wr.width = 2 * svr.width / 3;
+                    wr.height = svr.height;
+                    wr.y = svr.y;                        // top-edge
+                    wr.x = svr.x + svr.width / 3;
+                    window.doop("move", wr);
+                    break;
 
                 case "top-left":
                     wr.width = svr.width >> 1;   // half-width

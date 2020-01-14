@@ -7,6 +7,7 @@ KS.register(KS.mode("right-half"), ["3:ctrl,cmd"]);
 KS.register(KS.mode("left-third"), ["4:ctrl,cmd"]);
 KS.register(KS.mode("middle-third"), ["5:ctrl,cmd"]);
 KS.register(KS.mode("right-third"), ["6:ctrl,cmd"]);
+KS.register(KS.mode("right-two-thirds"), ["7:ctrl,cmd"]);
 
 KS.register(KS.op("nudge", "left"), ["left:ctrl,cmd"]);
 KS.register(KS.op("nudge", "right"), ["right:ctrl,cmd"]);
