@@ -219,6 +219,102 @@ if (KS === undefined) KS = {};
                 // S.log("[SLATE] svr: " + JSON.stringify(svr));
 
                 switch (op) {
+                case "foo":
+                    var screen = S.screen();
+                    var sid = screen.id();
+                    var cw = S.window();
+                    S.log("[SLATE] current window title: [" + cw.title() + "]");
+                    var wr = cw.rect();
+                    var svr = screen.visibleRect();
+                    wr.width = svr.width / 3;
+                    wr.height = svr.height;
+                    wr.y = svr.y;                        // top-edge
+                    wr.x = svr.x + svr.width / 3;
+                    cw.doop("move", wr);
+
+                    var apps = [];
+                    var windows = [];
+                    S.eachApp(function(someApp) {
+                        someApp.eachWindow(function(someWindow) {
+                            if (someWindow.screen().id() !== sid) {
+                                S.log("[SLATE] ignoring window on a different screen: [" + someWindow + "]");
+                                return;
+                            }
+                            if (someWindow.isMinimizedOrHidden()) {
+                                S.log("[SLATE] ignoring hidden window: [" + someWindow + "]");
+                                return;
+                            }
+                            if (!someWindow.isMovable()) {
+                                S.log("[SLATE] ignoring immovable window: [" + someWindow + "]");
+                                return;
+                            }
+                            if (!someWindow.isResizable()) {
+                                S.log("[SLATE] ignoring not resizable window: [" + someWindow + "]");
+                                return;
+                            }
+                            if (someWindow.title() == cw.title()) {
+                                S.log("[SLATE] ignoring current window: [" + someWindow + "]");
+                                return;
+                            }
+                            if (someWindow.title() === "") {
+                                S.log("[SLATE] ignoring window with empty title: [" + someWindow + "]");
+                                return;
+                            }
+                            windows.push(someWindow);
+                        });
+                    });
+
+                    var l = windows.length;
+
+                    // put half remaining windows on left and half on right
+                    var width = svr.width / 3;
+
+                    var half = l / 2;
+                    S.log("[SLATE] l " + l + "; half: " + half);
+                    var odd = l % 2 > 0;
+                    if (odd) half -= 0.5;
+
+                    var leftHeight = svr.height / half;
+                    var leftX = svr.x;
+                    var rightHeight = leftHeight; // assume even number of windows
+                    var rightX = svr.x + (2 * width);
+
+                    if (odd) {
+                        S.log("[SLATE] " + l + " odd number of windows: put " + half + " windows on left, and " + (half+1) + " windows on right.");
+                        rightHeight = svr.height / (half+1);
+                    } else {
+                        S.log("[SLATE] even number of windows: put " + half + " windows on each side.");
+                    }
+
+                    var x = svr.x;
+                    var y = svr.y;
+
+                    // Left
+                    for (var i = 0; i < half; i++) {
+                        S.log("[SLATE] left window: [" + windows[i].title() + "]");
+                        wr = windows[i].rect();
+                        wr.x = leftX;
+                        wr.y = y;
+                        wr.width = width;
+                        wr.height = leftHeight;
+                        windows[i].doop("move", wr);
+                        y += leftHeight;
+                    }
+
+                    // Right
+                    y = svr.y;
+                    for (; i < l; i++) {
+                        S.log("[SLATE] right window: [" + windows[i].title() + "]");
+                        wr = windows[i].rect();
+                        wr.x = rightX;
+                        wr.y = y;
+                        wr.width = width;
+                        wr.height = rightHeight;
+                        windows[i].doop("move", wr);
+                        y += rightHeight;
+                    }
+
+                    break;
                 case "columns":
                     window.doop("move", KS.snapWhenDone(wr, svr, function () {return KS.columns(param, wr, svr);}));
                     break;
