@@ -219,7 +219,7 @@ if (KS === undefined) KS = {};
                 // S.log("[SLATE] svr: " + JSON.stringify(svr));
 
                 switch (op) {
-                case "tile":
+                case "retile":
                     var screen = S.screen();
                     var sid = screen.id();
                     var cw = S.window();
@@ -371,7 +371,7 @@ if (KS === undefined) KS = {};
                     cw.doop("move", cwr);
 
                     break;
-                case "tile-third":
+                case "retile-third":
                     var screen = S.screen();
                     var sid = screen.id();
                     var cw = S.window();
