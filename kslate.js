@@ -223,7 +223,6 @@ if (KS === undefined) KS = {};
                     var screen = S.screen();
                     var sid = screen.id();
                     var cw = S.window();
-                    S.log("[SLATE] current window title: [" + cw.title() + "]");
                     var wr = cw.rect();
                     var svr = screen.visibleRect();
                     wr.width = svr.width / 3;
@@ -270,7 +269,6 @@ if (KS === undefined) KS = {};
                     var width = svr.width / 3;
 
                     var half = l / 2;
-                    S.log("[SLATE] l " + l + "; half: " + half);
                     var odd = l % 2 > 0;
                     if (odd) half -= 0.5;
 
