@@ -29,8 +29,8 @@ KS.register(KS.op("resize", "half-height"), ["down:ctrl,alt,cmd"]);
 KS.register(KS.op("resize", "grow"), ["g:ctrl,cmd"]);
 // KS.register(KS.op("resize", "shrink"), ["s:ctrl,cmd"]);
 
-KS.register(KS.op("focus"), ["f:ctrl,cmd"]);
-KS.register(KS.op("focus-swap"), ["s:ctrl,cmd"]);
+KS.register(KS.op("tile"), ["t:ctrl,cmd"]);
+KS.register(KS.op("tile-swap"), ["f:ctrl,cmd"]);
 
 // Bind All. NOTE: some of these may *not* work if you have not
 // removed the expose/spaces/mission control bindings.

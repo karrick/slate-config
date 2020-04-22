@@ -219,7 +219,7 @@ if (KS === undefined) KS = {};
                 // S.log("[SLATE] svr: " + JSON.stringify(svr));
 
                 switch (op) {
-                case "focus":
+                case "tile":
                     var screen = S.screen();
                     var sid = screen.id();
                     var cw = S.window();
@@ -314,7 +314,7 @@ if (KS === undefined) KS = {};
                     }
 
                     break;
-                case "focus-swap":
+                case "tile-swap":
                     var screen = S.screen();
                     var sid = screen.id();
                     var cw = S.window();
@@ -371,7 +371,7 @@ if (KS === undefined) KS = {};
                     cw.doop("move", cwr);
 
                     break;
-                case "focus-third":
+                case "tile-third":
                     var screen = S.screen();
                     var sid = screen.id();
                     var cw = S.window();
@@ -464,7 +464,7 @@ if (KS === undefined) KS = {};
                     }
 
                     break;
-                case "focus-swap-third":
+                case "tile-swap-third":
                     var screen = S.screen();
                     var sid = screen.id();
                     var cw = S.window();
