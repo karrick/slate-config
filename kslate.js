@@ -219,7 +219,63 @@ if (KS === undefined) KS = {};
                 // S.log("[SLATE] svr: " + JSON.stringify(svr));
 
                 switch (op) {
-                case "foo":
+                case "focus-swap":
+                    var screen = S.screen();
+                    var sid = screen.id();
+                    var cw = S.window();
+                    var cwr = cw.rect();
+
+                    // Find window which is currently in middle, with below coordinates:
+                    var fWidth = svr.width / 3;
+                    var fHeight = svr.height;
+                    var fX = svr.x + fWidth;
+                    var fY = svr.y; // top-edge
+                    var found = false;
+
+                    S.eachApp(function(someApp) {
+                        someApp.eachWindow(function(someWindow) {
+                            if (found === true) return;
+                            if (someWindow.screen().id() !== sid) {
+                                S.log("[SLATE] ignoring window on a different screen: [" + someWindow + "]");
+                                return;
+                            }
+                            if (someWindow.isMinimizedOrHidden()) {
+                                S.log("[SLATE] ignoring hidden window: [" + someWindow + "]");
+                                return;
+                            }
+                            if (!someWindow.isMovable()) {
+                                S.log("[SLATE] ignoring immovable window: [" + someWindow + "]");
+                                return;
+                            }
+                            if (!someWindow.isResizable()) {
+                                S.log("[SLATE] ignoring not resizable window: [" + someWindow + "]");
+                                return;
+                            }
+                            var wr = someWindow.rect();
+                            if (Math.abs(wr.x - fX) > 10 || Math.abs(wr.y - fY) > 10) {
+                                S.log("[SLATE] ignoring window not close to middle: [" + someWindow + "]");
+                                return;
+                            }
+                            wr.x = cwr.x;
+                            wr.y = cwr.y;
+                            wr.width = cwr.width;
+                            wr.height = cwr.height;
+                            someWindow.doop("move", wr);
+                            found = true;
+                        });
+                    });
+
+                    if (found === false) {
+                        S.log("[SLATE] cannot find window in the middle");
+                    }
+                    cwr.x = fX;
+                    cwr.y = fY;
+                    cwr.width = fWidth;
+                    cwr.height = fHeight;
+                    cw.doop("move", cwr);
+
+                    break;
+                case "focus":
                     var screen = S.screen();
                     var sid = screen.id();
                     var cw = S.window();
@@ -231,7 +287,6 @@ if (KS === undefined) KS = {};
                     wr.x = svr.x + svr.width / 3;
                     cw.doop("move", wr);
 
-                    var apps = [];
                     var windows = [];
                     S.eachApp(function(someApp) {
                         someApp.eachWindow(function(someWindow) {
