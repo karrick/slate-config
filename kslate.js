@@ -284,7 +284,7 @@ if (KS === undefined) KS = {};
                     wr.width = svr.width / 3;
                     wr.height = svr.height;
                     wr.y = svr.y;                        // top-edge
-                    wr.x = svr.x + svr.width / 3;
+                    wr.x = svr.x + wr.width;
                     cw.doop("move", wr);
 
                     var windows = [];
