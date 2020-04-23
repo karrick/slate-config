@@ -547,7 +547,7 @@ if (KS === undefined) KS = {};
         }},
         mode: {enumerable: true, value: function(mode) {
             return function(window) {
-                // S.log("[SLATE] mode: " + mode);
+                S.log("[SLATE] mode: " + mode + "; window: " + window);
                 var wr = window.rect();
                 var svr = window.screen().visibleRect();
 
