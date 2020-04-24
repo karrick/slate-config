@@ -57,7 +57,7 @@ if (KS === undefined) KS = {};
 
         //
         // Main Windows
-        // 
+        //
 
         var half = mainCount / 2;
         var odd = mainCount % 2;
@@ -97,9 +97,9 @@ if (KS === undefined) KS = {};
             y += height;
         }
 
-        // 
+        //
         // Sidebars
-        // 
+        //
 
         half = sidebarCount / 2;
         odd = sidebarCount % 2;
@@ -401,61 +401,68 @@ if (KS === undefined) KS = {};
                     if (columnIndex > 0 && wx - left <= snap) {
                         left -= gridWidth;
                     }
-                    var oldLeft = left;
-                    
-                    var repeat = true;
-                    while (!!repeat) {
-                        repeat = false;
-                        S.log('[SLATE] offset: ' + offset + '; columnIndex: ' + columnIndex + '; left: ' + left);
-                        for (var i = 0, l = allWindows.length; i < l; i++) {
-                            var someWindow = allWindows[i];
-                            var someRect = someWindow.rect();
+                    S.log('[SLATE] offset: ' + offset + '; columnIndex: ' + columnIndex + '; left: ' + left);
+                    for (var i = 0, l = allWindows.length; i < l; i++) {
+                        var someWindow = allWindows[i];
+                        var someRect = someWindow.rect();
+                        S.log('[SLATE] title: ' + someWindow.title() + '; rect: ' + JSON.stringify(someRect));
 
-                            if (someRect.x === oldLeft) {
-                                someRect.x = left;
-                                someRect.width -= (left - oldLeft);
-                                someWindow.doop("move", someRect);
-                                continue;
-                            }
-                            if (someRect.x + someRect.width === oldLeft) {
-                                someRect.width += (left - oldLeft);
-                                someWindow.doop("move", someRect);
-                                continue;
-                            }
+                        if (someRect.x === oldLeft) {
+                            someRect.x = left;
+                            someRect.width -= (left - oldLeft);
+                            someWindow.doop("move", someRect);
+                            continue;
+                        }
+                        if (someRect.x + someRect.width === oldLeft) {
+                            someRect.width += (left - oldLeft);
+                            someWindow.doop("move", someRect);
+                            continue;
+                        }
 
-                            var diff = someRect.x - left;
-                            // S.log('[SLATE] left edge diff: ' + diff + '; tw.x: ' + someRect.x + '; wx: ' + wx);
-                            if (diff > 0 && someRect.x <= wx) {
-                                // Move the left edge of windows that share a
-                                // left edge with the main window.
-                                someRect.width += diff;
-                                someRect.x = left;
+                        var diff = someRect.x - left;
+                        if (diff > 0 && someRect.x <= wx) {
+                            S.log('[SLATE] left edge diff: ' + diff + '; someRect.x: ' + someRect.x + '; wx: ' + wx);
+                            // Move the left edge of windows that share a
+                            // left edge with the main window.
+                            someRect.width += diff;
+                            someRect.x = left;
+                            someWindow.doop("move", someRect);
+                            S.log('[SLATE] move left edge to the left, growing window: ' + someWindow.title());
+                        } else {
+                            // Move the right edge of windows that share a
+                            // right edge with the main window.
+                            x = someRect.x + someRect.width;
+                            diff = x - left;
+                            if (diff > 0 && x < wx) {
+                                S.log('[SLATE] right edge diff: ' + diff);
+                                someRect.width -= diff;
+                                var tw = someRect.width;
                                 someWindow.doop("move", someRect);
-                                // someRect = someWindow.rect();
-                                // S.log('[SLATE] move left edge to the left, growing window: ' + someWindow.title());
-                            } else {
-                                // Move the right edge of windows that share a
-                                // right edge with the main window.
-                                x = someRect.x + someRect.width;
-                                diff = x - left;
-                                // S.log('[SLATE] right edge diff: ' + diff);
-                                if (diff > 0 && x < wx) {
-                                    someRect.width -= diff;
-                                    var tw = someRect.width;
-                                    someWindow.doop("move", someRect);
-                                    // Check whether shrink worked
-                                    someRect = someWindow.rect();
-                                    diff = someRect.width - tw;
-                                    if (diff > 0) {
-                                        oldLeft = left;
-                                        left += diff;
-                                        S.log('[SLATE] width target: ' + tw + '; actual: ' + someRect.width + '; left old: ' + oldLeft + '; left: ' + left);
-                                        repeat = true;
+                                // Check whether shrink worked
+                                someRect = someWindow.rect();
+                                var leftDiff = someRect.width - tw;
+                                S.log('[SLATE] width target: ' + tw + '; actual: ' + someRect.width + '; tw: ' + tw + '; title: ' + someWindow.title());
+                                if (leftDiff > 0) {
+                                    var oldLeft = left;
+                                    left += leftDiff;
+                                    for (var ii = 0; ii < i; ii++) {
+                                        someWindow = allWindows[ii];
+                                        someRect = someWindow.rect();
+                                        if (someRect.x === oldLeft) {
+                                            someRect.x = left;
+                                            someRect.width -= leftDiff;
+                                            S.log('[SLATE] shrinking left: ' + someWindow.title());
+                                            someWindow.doop("move", someRect);
+                                        } else if (someRect.x + someRect.width === oldLeft) {
+                                            someRect.width += leftDiff;
+                                            S.log('[SLATE] growing left: ' + someWindow.title());
+                                            someWindow.doop("move", someRect);
+                                        }
                                     }
-                                    //     S.log('[SLATE] move right edge to the left, shrinking window: ' + someWindow.title());
-                                    // } else if (false) {
-                                    //     S.log('[SLATE] do nothing: ' + someWindow.title());
                                 }
+                                //     S.log('[SLATE] move right edge to the left, shrinking window: ' + someWindow.title());
+                                // } else if (false) {
+                                //     S.log('[SLATE] do nothing: ' + someWindow.title());
                             }
                         }
                     }
@@ -481,7 +488,7 @@ if (KS === undefined) KS = {};
                     //     targetX = rightX;
                     // }
                     // S.log('[SLATE] width: ' + width + '; minX: ' + minX + '; maxX: ' + maxX + '; targetX: ' + targetX);
-                    
+
                     // // // find all windows that have same left x, and subtract constant
                     // // // find all windows that have right x that equals the above left x, and subtract constant
                     // // S.eachApp(function(someApp) {
@@ -530,7 +537,7 @@ if (KS === undefined) KS = {};
                     var cwr = cw.rect();
                     S.log('[SLATE] cwr: ' + JSON.stringify(cwr));
                     var leftX = cwr.x;
-                    
+
                     // find all windows that have same left x, and subtract constant
                     // find all windows that have right x that equals the above left x, and subtract constant
                     S.eachApp(function(someApp) {
@@ -691,7 +698,7 @@ if (KS === undefined) KS = {};
 
                     // Sort all windows into two groups: sidebars and mains.
                     var sidebars = [], mains = [];
-                    
+
                     S.eachApp(function(someApp) {
                         someApp.eachWindow(function(someWindow) {
                             if (someWindow.screen().id() !== sid) return;
@@ -734,7 +741,7 @@ if (KS === undefined) KS = {};
 
                     // Sort all windows into two groups: sidebars and mains.
                     var sidebars = [], mains = [];
-                    
+
                     S.eachApp(function(someApp) {
                         someApp.eachWindow(function(someWindow) {
                             if (someWindow.screen().id() !== sid) return;
