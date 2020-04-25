@@ -5,24 +5,9 @@ if (KS === undefined) KS = {};
 (function(KS, S) {
     "use strict";
 
-    // allWindows invokes callback for each window.
-    var allWindows = function(callback) {
-        var results = [];
-        S.eachApp(function(someApp) {
-            someApp.eachWindow(function(someWindow) {
-                if (someWindow.isMinimizedOrHidden()) return;
-                if (!someWindow.isMovable()) return;
-                if (!someWindow.isResizable()) return;
-                var result = callback(someWindow);
-                if (result !== undefined) results.push(result);
-            });
-        });
-        return results;
-    };
-
     var grid = function(mainWindows, sidebarWindows) {
         var screen = S.screen();
-        var svr = screen.visibleRect();
+        var sr = screen.visibleRect();
 
         // Compute placement of main windows first. If no main windows, then
         // allow center portion of screen to be used for sidebar windows.
@@ -35,15 +20,15 @@ if (KS === undefined) KS = {};
         }
         var sidebarCount = sidebarWindows.length;
 
-        var mainWidthTotal = svr.width * KS.mainWidth;
-        var sidebarWidth = (svr.width - mainWidthTotal) / 2;
-        var sidebarLeftX = svr.x;
+        var mainWidthTotal = sr.width * KS.mainWidth;
+        var sidebarWidth = (sr.width - mainWidthTotal) / 2;
+        var sidebarLeftX = sr.x;
         var mainLeftX = sidebarLeftX + sidebarWidth;
         var sidebarRightX = mainLeftX + mainWidthTotal;
         var mainWidth = mainCount > 1 ? mainWidthTotal / 2 : mainWidthTotal;
         var mainRightX = mainLeftX + mainWidth;
         var computedTotal = (2*sidebarWidth) + mainWidthTotal;
-        if (true || Math.abs(svr.width - computedTotal) > 10) {
+        if (true || Math.abs(sr.width - computedTotal) > 10) {
             S.log('[SLATE] mainWidthTotal: ' + mainWidthTotal);
             S.log('[SLATE] sidebarWidth: ' + sidebarWidth);
             S.log('[SLATE] left sidebar from ' + sidebarLeftX + ' to ' + (sidebarLeftX + sidebarWidth));
@@ -51,7 +36,7 @@ if (KS === undefined) KS = {};
             S.log('[SLATE] right sidebar from ' + sidebarRightX + ' to ' + (sidebarRightX + sidebarWidth));
             S.log('[SLATE] mainWidth: ' + mainWidth);
             S.log('[SLATE] mainRightX: ' + mainRightX);
-            S.log('[SLATE] svr.width: ' + svr.width + '; computed total: ' + computedTotal);
+            S.log('[SLATE] sr.width: ' + sr.width + '; computed total: ' + computedTotal);
             // return;
         }
 
@@ -70,8 +55,8 @@ if (KS === undefined) KS = {};
         }
 
         // Main Left
-        var y = svr.y;
-        var height = svr.height / half;
+        var y = sr.y;
+        var height = sr.height / half;
         for (var i = 0; i < half; i++) {
             S.log("[SLATE] left main window: [" + mainWindows[i].title() + "]");
             var wr = mainWindows[i].rect();
@@ -84,8 +69,8 @@ if (KS === undefined) KS = {};
         }
 
         // Main Right
-        y = svr.y;
-        height = svr.height / (mainCount - i);
+        y = sr.y;
+        height = sr.height / (mainCount - i);
         for (; i < mainCount; i++) {
             S.log("[SLATE] right main window: [" + mainWindows[i].title() + "]");
             wr = mainWindows[i].rect();
@@ -112,8 +97,8 @@ if (KS === undefined) KS = {};
         }
 
         // Sidebar Left
-        y = svr.y;
-        height = svr.height / half;
+        y = sr.y;
+        height = sr.height / half;
         for (i = 0; i < half; i++) {
             S.log("[SLATE] left sidebar window: [" + sidebarWindows[i].title() + "]");
             wr = sidebarWindows[i].rect();
@@ -126,8 +111,8 @@ if (KS === undefined) KS = {};
         }
 
         // Sidebar Right
-        y = svr.y;
-        height = svr.height / (sidebarCount - i);
+        y = sr.y;
+        height = sr.height / (sidebarCount - i);
         for (; i < sidebarCount; i++) {
             S.log("[SLATE] right sidebar window: [" + sidebarWindows[i].title() + "]");
             wr = sidebarWindows[i].rect();
@@ -148,39 +133,39 @@ if (KS === undefined) KS = {};
         extraOnLeft: {writable: true, value: true},
         mainWidth: {writable: true, value: 0.5},
         mains: {writable: true, value: []},
-        columns: {value: function (param, wr, svr) {
+        columns: {value: function (param, wr, sr) {
             switch (param) {
             case "40":
-                wr.width = svr.width * 0.4;
-                wr.height = svr.height;
+                wr.width = sr.width * 0.4;
+                wr.height = sr.height;
                 break;
             case "60":
-                wr.width = svr.width * 0.6;
-                wr.height = svr.height;
+                wr.width = sr.width * 0.6;
+                wr.height = sr.height;
                 break;
             case "full":
-                wr.width = svr.width;
-                wr.height = svr.height;
+                wr.width = sr.width;
+                wr.height = sr.height;
                 break;
             case "one-half":
-                wr.width = svr.width >> 1;
-                wr.height = svr.height;
+                wr.width = sr.width >> 1;
+                wr.height = sr.height;
                 break;
             case "one-third":
-                wr.width = svr.width / 3;
-                wr.height = svr.height;
+                wr.width = sr.width / 3;
+                wr.height = sr.height;
                 break;
             case "one-quarter":
-                wr.width = svr.width >> 2;
-                wr.height = svr.height;
+                wr.width = sr.width >> 2;
+                wr.height = sr.height;
                 break;
             case "two-thirds":
-                wr.width = svr.width * 2 / 3;
-                wr.height = svr.height;
+                wr.width = sr.width * 2 / 3;
+                wr.height = sr.height;
                 break;
             case "three-quarters":
-                wr.width = (svr.width >> 2) * 3;
-                wr.height = svr.height;
+                wr.width = (sr.width >> 2) * 3;
+                wr.height = sr.height;
                 break;
             default:
                 S.log("[SLATE] cannot set to unknown column description: " + param);
@@ -206,50 +191,55 @@ if (KS === undefined) KS = {};
             }
             return wr;
         }},
-        position: {value: function (param, wr, svr) {
+        position: {value: function (param, wr, sr) {
             switch (param) {
             case "top-left":
-                wr.x = svr.x;
-                wr.y = svr.y;
+                wr.x = sr.x;
+                wr.y = sr.y;
                 break;
             case "top-center":
-                wr.x = (svr.width - wr.width) / 2 + svr.x;
-                wr.y = svr.y;
+                wr.x = (sr.width - wr.width) / 2 + sr.x;
+                wr.y = sr.y;
                 break;
             case "top-right":
-                wr.x = svr.x + svr.width - wr.width;
-                wr.y = svr.y;
+                wr.x = sr.x + sr.width - wr.width;
+                wr.y = sr.y;
                 break;
             case "middle-left":
-                wr.x = svr.x;
-                wr.y = (svr.height - wr.height) / 2 + svr.y;
+                wr.x = sr.x;
+                wr.y = (sr.height - wr.height) / 2 + sr.y;
                 break;
             case "middle-center":
-                wr.x = (svr.width - wr.width) / 2 + svr.x;
-                wr.y = (svr.height - wr.height) / 2 + svr.y;
+                wr.x = (sr.width - wr.width) / 2 + sr.x;
+                wr.y = (sr.height - wr.height) / 2 + sr.y;
                 break;
             case "middle-right":
-                wr.x = svr.x + svr.width - wr.width;
-                wr.y = (svr.height - wr.height) / 2 + svr.y;
+                wr.x = sr.x + sr.width - wr.width;
+                wr.y = (sr.height - wr.height) / 2 + sr.y;
                 break;
             case "bottom-left":
-                wr.x = svr.x;
-                wr.y = svr.y + svr.height - wr.height;
+                wr.x = sr.x;
+                wr.y = sr.y + sr.height - wr.height;
                 break;
             case "bottom-center":
-                wr.x = (svr.width - wr.width) / 2 + svr.x;
-                wr.y = svr.y + svr.height - wr.height;
+                wr.x = (sr.width - wr.width) / 2 + sr.x;
+                wr.y = sr.y + sr.height - wr.height;
                 break;
             case "bottom-right":
-                wr.x = svr.x + svr.width - wr.width;
-                wr.y = svr.y + svr.height - wr.height;
+                wr.x = sr.x + sr.width - wr.width;
+                wr.y = sr.y + sr.height - wr.height;
                 break;
             default:
                 S.log("[SLATE] cannot move in unknown direction: " + param);
             }
             return wr;
         }},
-        resize: {value: function (param, wr, svr, dx, dy) {
+        register: {enumerable: true, value: function (op, keystrokes) {
+            keystrokes.forEach(function (keystroke) {
+                S.bind(keystroke, op);
+            });
+        }},
+        resize: {value: function (param, wr, sr, dx, dy) {
             switch (param) {
             case "grow":
                 wr.x -= dx;
@@ -280,77 +270,72 @@ if (KS === undefined) KS = {};
                 wr.height -= dy << 1;
                 break;
             case "full-height":
-                wr.height = svr.height;
+                wr.height = sr.height;
                 break;
             case "half-height":
-                wr.height = svr.height >> 1;
+                wr.height = sr.height >> 1;
                 break;
             case "full-width":
-                wr.width = svr.width;
+                wr.width = sr.width;
                 break;
             case "half-width":
-                wr.width = svr.width >> 1;
+                wr.width = sr.width >> 1;
                 break;
             default:
                 S.log("[SLATE] cannot resize in unknown direction: " + param);
             }
             return wr;
         }},
-        restrictRectToVisible: {value: function (wr, svr) {
-            if (wr.x < svr.x) wr.x = svr.x;
-            if (wr.y < svr.y) wr.y = svr.y;
-            if (wr.width > svr.width) wr.width = svr.width;
-            if (wr.height > svr.height) wr.height = svr.height;
+        restrictRectToVisible: {value: function (wr, sr) {
+            if (wr.x < sr.x) wr.x = sr.x;
+            if (wr.y < sr.y) wr.y = sr.y;
+            if (wr.width > sr.width) wr.width = sr.width;
+            if (wr.height > sr.height) wr.height = sr.height;
 
-            var maxX = svr.x + svr.width - wr.width;
+            var maxX = sr.x + sr.width - wr.width;
             if (wr.x > maxX) wr.x = maxX;
 
-            var maxY = svr.y + svr.height - wr.height;
+            var maxY = sr.y + sr.height - wr.height;
             if (wr.y > maxY) wr.y = maxY;
 
             return wr;
         }},
-        snapWhenDone: {value: function (wr, svr, someFunction) {
-            var edge = KS.whichEdge(wr, svr);
+        snapWhenDone: {value: function (wr, sr, someFunction) {
+            var edge = KS.whichEdge(wr, sr);
             wr = someFunction(wr);
             if (edge !== undefined && edge !== '') {
                 if (edge.indexOf("top") !== -1) {
-                    wr.y = svr.y;
+                    wr.y = sr.y;
                 }
                 if (edge.indexOf("left") !== -1) {
-                    wr.x = svr.x;
+                    wr.x = sr.x;
                 }
                 if (edge.indexOf("bottom") !== -1) {
-                    wr.y = (svr.y + svr.height) - wr.height;
+                    wr.y = (sr.y + sr.height) - wr.height;
                 }
                 if (edge.indexOf("right") !== -1) {
-                    wr.x = (svr.x + svr.width) - wr.width;
+                    wr.x = (sr.x + sr.width) - wr.width;
                 }
             }
             return wr;
         }},
-        whichEdge: {value: function (wr, svr) {
+        whichEdge: {value: function (wr, sr) {
             // RESULT: top|topleft|topright|bottom|bottomleft|bottomright|left|right
             var snapTolerance = 25;
             var result = '';
             // snapTop takes priority over snapBottom
-            if (wr.y <= svr.y + snapTolerance) {
+            if (wr.y <= sr.y + snapTolerance) {
                 result = 'top';
-            } else if (wr.y + wr.height + snapTolerance >= svr.y + svr.height) {
+            } else if (wr.y + wr.height + snapTolerance >= sr.y + sr.height) {
                 result = 'bottom';
             }
             // snapLeft takes priority over snapRight
-            if (wr.x <= svr.x + snapTolerance) {
+            if (wr.x <= sr.x + snapTolerance) {
                 result += 'left';
-            } else if (wr.x + wr.width + snapTolerance >= svr.x + svr.width) {
+            } else if (wr.x + wr.width + snapTolerance >= sr.x + sr.width) {
                 result += 'right';
             }
             return result;
-        }},
-        register: {enumerable: true, value: function (op, keystrokes) {
-            keystrokes.forEach(function (keystroke) {
-                S.bind(keystroke, op);
-            });
         }},
         op: {enumerable: true, value: function (op, param, factor) {
             return function (window) {
@@ -376,6 +361,9 @@ if (KS === undefined) KS = {};
                 var windowsCount = windows.length;
 
                 switch (op) {
+                case "retile-bad":
+                    grid(windows, []);
+                    break;                    
                 case "retile":
                     var title = window.title();
                     var sidebars = [];
