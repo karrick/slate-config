@@ -5,6 +5,8 @@ if (KS === undefined) KS = {};
 (function(KS, S) {
     "use strict";
 
+    // grid aligns the mainWindows in the center and sidebarWindows on the
+    // sides.
     var grid = function(mainWindows, sidebarWindows) {
         var screen = S.screen();
         var sr = screen.visibleRect();
@@ -16,17 +18,19 @@ if (KS === undefined) KS = {};
         if (mainCount < 1) {
             // When no main windows, behave as if all were main windows.
             mainWindows = sidebarWindows;
+            mainCount = mainWindows.length;
             sidebarWindows = [];
         }
         var sidebarCount = sidebarWindows.length;
 
         var mainWidthTotal = sr.width * KS.mainWidth;
-        var sidebarWidth = (sr.width - mainWidthTotal) / 2;
         var sidebarLeftX = sr.x;
+        var sidebarWidth = (sr.width - mainWidthTotal) / 2;
         var mainLeftX = sidebarLeftX + sidebarWidth;
         var sidebarRightX = mainLeftX + mainWidthTotal;
         var mainWidth = mainCount > 1 ? mainWidthTotal / 2 : mainWidthTotal;
         var mainRightX = mainLeftX + mainWidth;
+
         var computedTotal = (2*sidebarWidth) + mainWidthTotal;
         if (true || Math.abs(sr.width - computedTotal) > 10) {
             S.log('[SLATE] mainWidthTotal: ' + mainWidthTotal);
@@ -361,7 +365,7 @@ if (KS === undefined) KS = {};
                 var windowsCount = windows.length;
 
                 switch (op) {
-                case "retile-bad":
+                case "retile-all-main":
                     grid(windows, []);
                     break;
                 case "retile":
@@ -554,6 +558,8 @@ if (KS === undefined) KS = {};
                     for (var i = 0; i < windowsCount; i++) {
                         var someWindow = windows[i];
                         var descriptor = JSON.stringify({title: someWindow.title(), pid: someWindow.pid()});
+                        // Before we promote this window to mains, make sure it
+                        // is not already there.
                         var ii = KS.mains.length;
                         while (ii--) {
                             if (descriptor === KS.mains[ii]) {
@@ -561,6 +567,7 @@ if (KS === undefined) KS = {};
                                 return;
                             }
                         }
+
                         sidebars.push(someWindow);
                     }
 
