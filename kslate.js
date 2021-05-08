@@ -363,7 +363,7 @@ if (KS === undefined) KS = {};
                 switch (op) {
                 case "retile-bad":
                     grid(windows, []);
-                    break;                    
+                    break;
                 case "retile":
                     var title = window.title();
                     var sidebars = [];
@@ -375,7 +375,7 @@ if (KS === undefined) KS = {};
                         }
                     }
                     grid([window], sidebars);
-                    break;                    
+                    break;
                     // case "grow-left":
                     //     var gridWidth = sr.width * KS.deltaX;
                     //     var wx = wr.x;

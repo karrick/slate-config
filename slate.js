@@ -8,6 +8,8 @@ KS.register(KS.mode("left-third"), ["4:ctrl,cmd"]);
 KS.register(KS.mode("middle-third"), ["5:ctrl,cmd"]);
 KS.register(KS.mode("right-third"), ["6:ctrl,cmd"]);
 KS.register(KS.mode("right-two-thirds"), ["7:ctrl,cmd"]);
+KS.register(KS.mode("top-half"), ["8:ctrl,cmd"]);
+KS.register(KS.mode("bottom-half"), ["9:ctrl,cmd"]);
 
 // KS.register(KS.op("grow-left"), ["left:ctrl,cmd"]);
 // KS.register(KS.op("shrink-left"), ["left:shift,ctrl,cmd"]);
