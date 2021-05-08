@@ -825,6 +825,57 @@ if (KS === undefined) KS = {};
                 var svr = window.screen().visibleRect();
 
                 switch (mode) {
+                case "top":
+                    wr.y = svr.y; // top-edge
+                    window.doop("move", KS.restrictRectToVisible(wr, svr));
+                    break;
+                case "right":
+                    wr.x = svr.x + svr.width - wr.width; // right-side
+                    window.doop("move", KS.restrictRectToVisible(wr, svr));
+                    break;
+                case "bottom":
+                    wr.y = svr.y + svr.height - wr.height; // bottom-edge
+                    window.doop("move", KS.restrictRectToVisible(wr, svr));
+                    break;
+                case "left":
+                    wr.x = svr.x; // left-side
+                    window.doop("move", KS.restrictRectToVisible(wr, svr));
+                    break;
+
+                case "width-full":
+                    wr.width = svr.width;   // full-width
+                    window.doop("move", KS.restrictRectToVisible(wr, svr));
+                    break;
+                case "width-half":
+                    wr.width = svr.width >> 1; // half-width
+                    window.doop("move", KS.restrictRectToVisible(wr, svr));
+                    break;
+                case "width-third":
+                    wr.width = svr.width / 3; // third-width
+                    window.doop("move", KS.restrictRectToVisible(wr, svr));
+                    break;
+                case "width-two-thirds":
+                    wr.width = (svr.width << 1) / 3; // two-third-width
+                    window.doop("move", KS.restrictRectToVisible(wr, svr));
+                    break;
+
+                case "height-full":
+                    wr.height = svr.height; // full-height
+                    window.doop("move", KS.restrictRectToVisible(wr, svr));
+                    break;
+                case "height-half":
+                    wr.height = svr.height >> 1; // half-height
+                    window.doop("move", KS.restrictRectToVisible(wr, svr));
+                    break;
+                case "height-third":
+                    wr.height = svr.height / 3; // third-height
+                    window.doop("move", KS.restrictRectToVisible(wr, svr));
+                    break;
+                case "height-two-thirds":
+                    wr.height = (svr.height << 1) / 3; // two-thirds-height
+                    window.doop("move", KS.restrictRectToVisible(wr, svr));
+                    break;
+
                 case "full-screen":
                     wr.width = svr.width;   // full-width
                     wr.height = svr.height; // full-height
