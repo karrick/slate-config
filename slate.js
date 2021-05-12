@@ -4,6 +4,8 @@ S.src(".kslate.js");
 // full <-> three-quarters <-> two-thirds <-> one-half <-> one-third <-> one-quarter
 // grow moves to the left and shrink moves to the right
 
+KS.register(KS.mode("full-screen"), ["0:ctrl,cmd"]);
+
 // top (NORTH) (UP), right (EAST) (RIGHT), bottom (SOUTH) (DOWN), left (WEST) (LEFT)
 KS.register(KS.mode("left"), ["left:ctrl,cmd"]);
 KS.register(KS.mode("right"), ["right:ctrl,cmd"]);
