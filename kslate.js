@@ -344,6 +344,9 @@ if (KS === undefined) KS = {};
         op: {enumerable: true, value: function (op, param, factor) {
             return function (window) {
                 S.log("[SLATE] operation: " + op + "; param: " + param + '; window: ' + window);
+                if (window === undefined) {
+                    return;     // silently ignore when no window is defined.
+                }
 
                 var screen = S.screen();
                 var sid = screen.id();
@@ -828,6 +831,9 @@ if (KS === undefined) KS = {};
         mode: {enumerable: true, value: function(mode) {
             return function(window) {
                 S.log("[SLATE] mode: " + mode + "; window: " + window);
+                if (window === undefined) {
+                    return;     // silently ignore when no window is defined.
+                }
                 var wr = window.rect();
                 var svr = window.screen().visibleRect();
 
