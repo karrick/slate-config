@@ -1,36 +1,48 @@
 // load KS library
 S.src(".kslate.js");
 
-KS.register(KS.mode("full-screen"), ["1:ctrl,cmd"]);
-KS.register(KS.mode("left-half"), ["2:ctrl,cmd"]);
-KS.register(KS.mode("right-half"), ["3:ctrl,cmd"]);
-KS.register(KS.mode("left-third"), ["4:ctrl,cmd"]);
-KS.register(KS.mode("middle-third"), ["5:ctrl,cmd"]);
-KS.register(KS.mode("right-third"), ["6:ctrl,cmd"]);
-KS.register(KS.mode("right-two-thirds"), ["7:ctrl,cmd"]);
+// full <-> three-quarters <-> two-thirds <-> one-half <-> one-third <-> one-quarter
+// grow moves to the left and shrink moves to the right
 
-KS.register(KS.op("nudge", "left"), ["left:ctrl,cmd"]);
-KS.register(KS.op("nudge", "right"), ["right:ctrl,cmd"]);
-KS.register(KS.op("nudge", "up"), ["up:ctrl,cmd"]);
-KS.register(KS.op("nudge", "down"), ["down:ctrl,cmd"]);
+KS.register(KS.mode("full-screen"), ["0:ctrl,cmd"]);
 
-KS.register(KS.op("resize", "grow-horizontal"), ["right:shift,ctrl,cmd"]);
-KS.register(KS.op("resize", "shrink-horizontal"), ["left:shift,ctrl,cmd"]);
+// position
+KS.register(KS.mode("left"), ["left:ctrl,cmd"]);
+KS.register(KS.mode("right"), ["right:ctrl,cmd"]);
+KS.register(KS.mode("top"), ["up:ctrl,cmd"]);
+KS.register(KS.mode("bottom"), ["down:ctrl,cmd"]);
 
-KS.register(KS.op("resize", "grow-vertical"), ["up:shift,ctrl,cmd"]);
-KS.register(KS.op("resize", "shrink-vertical"), ["down:shift,ctrl,cmd"]);
+// width
+KS.register(KS.mode("width-third"), ["1:ctrl,cmd"]);
+KS.register(KS.mode("width-half"), ["2:ctrl,cmd"]);
+KS.register(KS.mode("width-two-thirds"), ["3:ctrl,cmd"]);
+KS.register(KS.mode("width-full"), ["4:ctrl,cmd"]);
 
-KS.register(KS.op("resize", "full-width"), ["right:ctrl,alt,cmd"]);
-KS.register(KS.op("resize", "half-width"), ["left:ctrl,alt,cmd"]);
+// height
+KS.register(KS.mode("height-third"), ["5:ctrl,cmd"]);
+KS.register(KS.mode("height-half"), ["6:ctrl,cmd"]);
+KS.register(KS.mode("height-two-thirds"), ["7:ctrl,cmd"]);
+KS.register(KS.mode("height-full"), ["8:ctrl,cmd"]);
 
-KS.register(KS.op("resize", "full-height"), ["up:ctrl,alt,cmd"]);
-KS.register(KS.op("resize", "half-height"), ["down:ctrl,alt,cmd"]);
+// columns
+KS.register(KS.mode("top-third"), ["t:ctrl,cmd"]);
+KS.register(KS.mode("bottom-two-thirds"), ["b:ctrl,cmd"]);
 
-KS.register(KS.op("resize", "grow"), ["g:ctrl,cmd"]);
+// rows
+KS.register(KS.mode("left-third"), ["l:ctrl,cmd"]);
+KS.register(KS.mode("right-two-thirds"), ["r:ctrl,cmd"]);
+
+// KS.register(KS.op("resize", "grow"), ["g:ctrl,cmd"]);
 // KS.register(KS.op("resize", "shrink"), ["s:ctrl,cmd"]);
 
-KS.register(KS.op("retile"), ["r:ctrl,cmd"]);
-KS.register(KS.op("tile-swap"), ["f:ctrl,cmd"]);
+// KS.register(KS.op("retile"), ["t:ctrl,cmd"]);
+// KS.register(KS.op("retile-all-main"), ["t:ctrl,alt,cmd"]);
+// KS.register(KS.op("tile-swap"), ["s:ctrl,cmd"]);
+
+// KS.register(KS.op("promote"), ["p:ctrl,cmd"]);
+// KS.register(KS.op("demote"), ["d:ctrl,cmd"]);
+
+// TODO: Stick window on corner: it's real estate no longer available.
 
 // Bind All. NOTE: some of these may *not* work if you have not
 // removed the expose/spaces/mission control bindings.
