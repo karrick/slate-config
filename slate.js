@@ -32,15 +32,15 @@ KS.register(KS.mode("bottom-two-thirds"), ["b:ctrl,cmd"]);
 KS.register(KS.mode("left-third"), ["l:ctrl,cmd"]);
 KS.register(KS.mode("right-two-thirds"), ["r:ctrl,cmd"]);
 
-KS.register(KS.op("resize", "grow"), ["g:ctrl,cmd"]);
+// KS.register(KS.op("resize", "grow"), ["g:ctrl,cmd"]);
 // KS.register(KS.op("resize", "shrink"), ["s:ctrl,cmd"]);
 
 // KS.register(KS.op("retile"), ["t:ctrl,cmd"]);
-KS.register(KS.op("retile-all-main"), ["t:ctrl,alt,cmd"]);
-KS.register(KS.op("tile-swap"), ["s:ctrl,cmd"]);
+// KS.register(KS.op("retile-all-main"), ["t:ctrl,alt,cmd"]);
+// KS.register(KS.op("tile-swap"), ["s:ctrl,cmd"]);
 
-KS.register(KS.op("promote"), ["p:ctrl,cmd"]);
-KS.register(KS.op("demote"), ["d:ctrl,cmd"]);
+// KS.register(KS.op("promote"), ["p:ctrl,cmd"]);
+// KS.register(KS.op("demote"), ["d:ctrl,cmd"]);
 
 // TODO: Stick window on corner: it's real estate no longer available.
 
