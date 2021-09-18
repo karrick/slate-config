@@ -6,25 +6,31 @@ S.src(".kslate.js");
 
 KS.register(KS.mode("full-screen"), ["0:ctrl,cmd"]);
 
-// top (NORTH) (UP), right (EAST) (RIGHT), bottom (SOUTH) (DOWN), left (WEST) (LEFT)
+// position
 KS.register(KS.mode("left"), ["left:ctrl,cmd"]);
 KS.register(KS.mode("right"), ["right:ctrl,cmd"]);
 KS.register(KS.mode("top"), ["up:ctrl,cmd"]);
 KS.register(KS.mode("bottom"), ["down:ctrl,cmd"]);
 
-// hsize 1 (1), 1/2 (2), 1/3 (3), 2/3 (4)
-KS.register(KS.mode("width-full"), ["1:ctrl,cmd"]);
+// width
+KS.register(KS.mode("width-third"), ["1:ctrl,cmd"]);
 KS.register(KS.mode("width-half"), ["2:ctrl,cmd"]);
-KS.register(KS.mode("width-third"), ["3:ctrl,cmd"]);
-KS.register(KS.mode("width-two-thirds"), ["4:ctrl,cmd"]);
+KS.register(KS.mode("width-two-thirds"), ["3:ctrl,cmd"]);
+KS.register(KS.mode("width-full"), ["4:ctrl,cmd"]);
 
-// vsize 1, 1/2, 1/3, 2/3
-KS.register(KS.mode("height-full"), ["5:ctrl,cmd"]);
+// height
+KS.register(KS.mode("height-third"), ["5:ctrl,cmd"]);
 KS.register(KS.mode("height-half"), ["6:ctrl,cmd"]);
-KS.register(KS.mode("height-third"), ["7:ctrl,cmd"]);
-KS.register(KS.mode("height-two-thirds"), ["8:ctrl,cmd"]);
-KS.register(KS.mode("bottom-two-thirds"), ["b:ctrl,cmd"]);
+KS.register(KS.mode("height-two-thirds"), ["7:ctrl,cmd"]);
+KS.register(KS.mode("height-full"), ["8:ctrl,cmd"]);
+
+// columns
 KS.register(KS.mode("top-third"), ["t:ctrl,cmd"]);
+KS.register(KS.mode("bottom-two-thirds"), ["b:ctrl,cmd"]);
+
+// rows
+KS.register(KS.mode("left-third"), ["l:ctrl,cmd"]);
+KS.register(KS.mode("right-two-thirds"), ["r:ctrl,cmd"]);
 
 KS.register(KS.op("resize", "grow"), ["g:ctrl,cmd"]);
 // KS.register(KS.op("resize", "shrink"), ["s:ctrl,cmd"]);
