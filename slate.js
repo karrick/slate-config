@@ -23,11 +23,13 @@ KS.register(KS.mode("height-full"), ["5:ctrl,cmd"]);
 KS.register(KS.mode("height-half"), ["6:ctrl,cmd"]);
 KS.register(KS.mode("height-third"), ["7:ctrl,cmd"]);
 KS.register(KS.mode("height-two-thirds"), ["8:ctrl,cmd"]);
+KS.register(KS.mode("bottom-two-thirds"), ["b:ctrl,cmd"]);
+KS.register(KS.mode("top-third"), ["t:ctrl,cmd"]);
 
 KS.register(KS.op("resize", "grow"), ["g:ctrl,cmd"]);
 // KS.register(KS.op("resize", "shrink"), ["s:ctrl,cmd"]);
 
-KS.register(KS.op("retile"), ["t:ctrl,cmd"]);
+// KS.register(KS.op("retile"), ["t:ctrl,cmd"]);
 KS.register(KS.op("retile-all-main"), ["t:ctrl,alt,cmd"]);
 KS.register(KS.op("tile-swap"), ["s:ctrl,cmd"]);
 

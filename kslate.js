@@ -826,146 +826,161 @@ if (KS === undefined) KS = {};
 
                 switch (mode) {
                 case "top":
-                    wr.y = sr.y; // top-edge
-                    window.doop("move", KS.restrictRectToVisible(wr, sr));
+                    wr.y = sr.y;
+                    window.doop("move", wr);
                     break;
                 case "right":
-                    wr.x = sr.x + sr.width - wr.width; // right-side
-                    window.doop("move", KS.restrictRectToVisible(wr, sr));
+                    wr.x = sr.x + sr.width - wr.width;
+                    window.doop("move", wr);
                     break;
                 case "bottom":
-                    wr.y = sr.y + sr.height - wr.height; // bottom-edge
-                    window.doop("move", KS.restrictRectToVisible(wr, sr));
+                    wr.y = sr.y + sr.height - wr.height;
+                    window.doop("move", wr);
                     break;
                 case "left":
-                    wr.x = sr.x; // left-side
-                    window.doop("move", KS.restrictRectToVisible(wr, sr));
+                    wr.x = sr.x;
+                    window.doop("move", wr);
                     break;
 
                 case "width-full":
-                    wr.width = sr.width;   // full-width
-                    window.doop("move", KS.restrictRectToVisible(wr, sr));
+                    wr.width = sr.width;
+                    window.doop("move", wr);
                     break;
                 case "width-half":
-                    wr.width = sr.width * 0.5; // half-width
-                    window.doop("move", KS.restrictRectToVisible(wr, sr));
+                    wr.width = sr.width * 0.5;
+                    window.doop("move", wr);
                     break;
                 case "width-third":
-                    wr.width = sr.width * 0.333; // third-width
-                    window.doop("move", KS.restrictRectToVisible(wr, sr));
+                    wr.width = sr.width * 0.333;
+                    window.doop("move", wr);
                     break;
                 case "width-two-thirds":
-                    wr.width = sr.width * 0.667; // two-third-width
-                    window.doop("move", KS.restrictRectToVisible(wr, sr));
+                    wr.width = sr.width * 0.667;
+                    window.doop("move", wr);
                     break;
 
                 case "height-full":
-                    wr.height = sr.height; // full-height
-                    window.doop("move", KS.restrictRectToVisible(wr, sr));
+                    wr.height = sr.height;
+                    window.doop("move", wr);
                     break;
                 case "height-half":
-                    wr.height = sr.height * 0.5; // half-height
-                    window.doop("move", KS.restrictRectToVisible(wr, sr));
+                    wr.height = sr.height * 0.5;
+                    window.doop("move", wr);
                     break;
                 case "height-third":
-                    wr.height = sr.height * 0.333; // third-height
-                    window.doop("move", KS.restrictRectToVisible(wr, sr));
+                    wr.height = sr.height * 0.333;
+                    window.doop("move", wr);
                     break;
                 case "height-two-thirds":
-                    wr.height = sr.height * 0.667; // two-thirds-height
-                    window.doop("move", KS.restrictRectToVisible(wr, sr));
+                    wr.height = sr.height * 0.667;
+                    window.doop("move", wr);
                     break;
 
                 case "full-screen":
-                    wr.width = sr.width;   // full-width
-                    wr.height = sr.height; // full-height
-                    wr.y = sr.y;           // top-edge
-                    wr.x = sr.x;           // left-side
+                    wr.width = sr.width;
+                    wr.height = sr.height;
+                    wr.y = sr.y;
+                    wr.x = sr.x;
                     window.doop("move", wr);
                     break;
                 case "left-half":
-                    wr.width = sr.width * 0.5;  // half-width
-                    wr.height = sr.height;    // full-height
-                    wr.y = sr.y;              // top-edge
-                    wr.x = sr.x;              // left-side
+                    wr.width = sr.width * 0.5;
+                    wr.height = sr.height;
+                    wr.y = sr.y;
+                    wr.x = sr.x;
                     window.doop("move", wr);
                     break;
                 case "right-half":
-                    wr.width = sr.width * 0.5;            // half-width
-                    wr.height = sr.height;              // full-height
-                    wr.y = sr.y;                        // top-edge
-                    wr.x = sr.x + sr.width - wr.width;  // right-side
+                    wr.width = sr.width * 0.5;
+                    wr.height = sr.height;
+                    wr.y = sr.y;
+                    wr.x = sr.x + sr.width - wr.width;
                     window.doop("move", wr);
                     break;
                 case "left-third":
                     wr.width = sr.width * 0.333;
                     wr.height = sr.height;
-                    wr.y = sr.y;                // top-edge
-                    wr.x = sr.x;                // left-side
+                    wr.y = sr.y;
+                    wr.x = sr.x;
                     window.doop("move", wr);
                     break;
                 case "middle-third":
                     wr.width = sr.width * 0.333;
                     wr.height = sr.height;
-                    wr.y = sr.y;                        // top-edge
+                    wr.y = sr.y;
                     wr.x = sr.width * 0.333 + sr.x;
                     window.doop("move", wr);
                     break;
                 case "right-third":
                     wr.width = sr.width * 0.333;
                     wr.height = sr.height;
-                    wr.y = sr.y;                        // top-edge
-                    wr.x = sr.x + sr.width - wr.width; // right-side
+                    wr.y = sr.y;
+                    wr.x = sr.x + sr.width - wr.width;
                     window.doop("move", wr);
                     break;
                 case "right-two-thirds":
-                    wr.width = 2 * sr.width * 0.333;
+                    wr.width = sr.width * 0.667;
                     wr.height = sr.height;
-                    wr.y = sr.y;                        // top-edge
+                    wr.y = sr.y;
                     wr.x = sr.width * 0.333 + sr.x;
                     window.doop("move", wr);
                     break;
 
                 case "top-left":
-                    wr.width = sr.width * 0.5;    // half-width
-                    wr.height = sr.height * 0.5;  // half-height
-                    wr.y = sr.y;                // top-edge
-                    wr.x = sr.x;                // left-side
-                    window.doop("move", wr);
-                    break;
-                case "top-half":
-                    wr.width = sr.width;        // full-width
-                    wr.height = sr.height * 0.5;  // half-height
-                    wr.y = sr.y;                // top-edge
-                    wr.x = sr.x;                // left-side
+                    wr.width = sr.width * 0.5;
+                    wr.height = sr.height * 0.5;
+                    wr.y = sr.y;
+                    wr.x = sr.x;
                     window.doop("move", wr);
                     break;
                 case "top-right":
-                    wr.width = sr.width * 0.5;            // half-width
-                    wr.height = sr.height * 0.5;          // half-height
-                    wr.y = sr.y;                        // top-edge
-                    wr.x = sr.x + sr.width - wr.width; // right-side
+                    wr.width = sr.width * 0.5;
+                    wr.height = sr.height * 0.5;
+                    wr.y = sr.y;
+                    wr.x = sr.x + sr.width - wr.width;
                     window.doop("move", wr);
                     break;
+                case "top-half":
+                    wr.width = sr.width;
+                    wr.height = sr.height * 0.5;
+                    wr.y = sr.y;
+                    wr.x = sr.x;
+                    window.doop("move", wr);
+                    break;
+                case "top-third":
+                    wr.width = sr.width;
+                    wr.height = sr.height * 0.333;
+                    wr.y = sr.y;
+                    wr.x = sr.x;
+                    window.doop("move", wr);
+                    break;
+
                 case "bottom-left":
-                    wr.width = sr.width * 0.5;              // half-width
-                    wr.height = sr.height * 0.5;            // half-height
-                    wr.y = sr.y + sr.height - wr.height; // bottom-edge
-                    wr.x = sr.x;                          // left-side
-                    window.doop("move", wr);
-                    break;
-                case "bottom-half":
-                    wr.width = sr.width;                  // full-width
-                    wr.height = sr.height * 0.5;            // half-width
-                    wr.y = sr.y + sr.height - wr.height; // bottom-edge
-                    wr.x = sr.x;                          // left-side
+                    wr.width = sr.width * 0.5;
+                    wr.height = sr.height * 0.5;
+                    wr.y = sr.y + sr.height - wr.height;
+                    wr.x = sr.x;
                     window.doop("move", wr);
                     break;
                 case "bottom-right":
-                    wr.width = sr.width * 0.5;              // half-width
-                    wr.height = sr.height * 0.5;            // half-height
-                    wr.y = sr.y + sr.height - wr.height; // bottom-edge
-                    wr.x = sr.x + sr.width - wr.width;   // right-side
+                    wr.width = sr.width * 0.5;
+                    wr.height = sr.height * 0.5;
+                    wr.y = sr.y + sr.height - wr.height;
+                    wr.x = sr.x + sr.width - wr.width;
+                    window.doop("move", wr);
+                    break;
+                case "bottom-half":
+                    wr.width = sr.width;
+                    wr.height = sr.height * 0.5;
+                    wr.y = sr.y + sr.height - wr.height;
+                    wr.x = sr.x;
+                    window.doop("move", wr);
+                    break;
+                case "bottom-two-thirds":
+                    wr.width = sr.width;
+                    wr.height = sr.height * 0.667;
+                    wr.y = sr.y + sr.height - wr.height;
+                    wr.x = sr.x;
                     window.doop("move", wr);
                     break;
 
