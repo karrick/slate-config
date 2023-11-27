@@ -47,35 +47,35 @@ KS.register(KS.mode("right-two-thirds"), ["r:ctrl,cmd"]);
 // Bind All. NOTE: some of these may *not* work if you have not
 // removed the expose/spaces/mission control bindings.
 S.bnda({
-    // Grid
-    // "esc:ctrl" : S.op("grid"),
+	// Grid
+	// "esc:ctrl" : S.op("grid"),
 
-    "-:ctrl,cmd": S.op("relaunch"),
+	"-:ctrl,cmd": S.op("relaunch"),
 
-    "tab:ctrl,cmd": S.op("switch"),
+	"tab:ctrl,cmd": S.op("switch"),
 
-    // "b:ctrl,cmd" : S.op("focus", { "app" : "Blue Jeans" }),
-    "c:ctrl,cmd" : S.op("focus", { "app" : "Slack" }),
-    "e:ctrl,cmd" : S.op("focus", { "app" : "Emacs" }),
-    // "p:ctrl,cmd" : S.op("focus", { "app" : "Safari Technology Preview" }),
-    "o:ctrl,cmd" : S.op("focus", { "app" : "Microsoft Outlook" }),
-    "i:ctrl,cmd" : S.op("focus", { "app" : "iTerm2" }),
-    "f:ctrl,cmd" : S.op("focus", { "app" : "Firefox" }),
+	// "b:ctrl,cmd" : S.op("focus", { "app" : "Blue Jeans" }),
+	"c:ctrl,cmd" : S.op("focus", { "app" : "Slack" }),
+	"e:ctrl,cmd" : S.op("focus", { "app" : "Emacs" }),
+	// "p:ctrl,cmd" : S.op("focus", { "app" : "Safari Technology Preview" }),
+	"o:ctrl,cmd" : S.op("focus", { "app" : "Microsoft Outlook" }),
+	"i:ctrl,cmd" : S.op("focus", { "app" : "iTerm2" }),
+	"f:ctrl,cmd" : S.op("focus", { "app" : "Firefox" }),
 
-    // change which window is in focus
-    "right:cmd" : S.op("focus", { "direction" : "right" }),
-    "left:cmd" : S.op("focus", { "direction" : "left" }),
-    "up:cmd" : S.op("focus", { "direction" : "up" }),
-    "down:cmd" : S.op("focus", { "direction" : "down" }),
+	// change which window is in focus
+	"right:cmd" : S.op("focus", { "direction" : "right" }),
+	"left:cmd" : S.op("focus", { "direction" : "left" }),
+	"up:cmd" : S.op("focus", { "direction" : "up" }),
+	"down:cmd" : S.op("focus", { "direction" : "down" }),
 
-    // Window Hints
-    "esc:cmd" : S.op("hint")
+	// Window Hints
+	"esc:cmd" : S.op("hint")
 });
 
 // Configs
 S.configAll({
-    "defaultToCurrentScreen" : true,
-    "checkDefaultsOnLoad" : true
+	"defaultToCurrentScreen" : true,
+	"checkDefaultsOnLoad" : true
 });
 
 // Log that we're done configuring
